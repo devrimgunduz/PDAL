@@ -369,8 +369,8 @@ TEST_F(OCITest, read_unprojected_data)
 
     // checkUnProjectedPoints(*view);
 
-    // compareAgainstSourceBuffer(*view,  Support::datapath("autzen-utm-chipped-25.las"));
-    compareAgainstSourceBuffer(*view, Support::datapath("autzen/autzen-utm.las"));
+    compareAgainstSourceBuffer(view,
+        Support::datapath("autzen/autzen-utm.las"));
 }
 
 

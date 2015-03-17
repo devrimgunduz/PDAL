@@ -116,7 +116,7 @@ void testReadWrite(bool compression, bool scaling)
     sqliteReader->prepare(table2);
     PointViewSet viewSet = sqliteReader->execute(table2);
     EXPECT_EQ(viewSet.size(), 1U);
-    PointViewPtr buffer = *viewSet.begin();
+    PointViewPtr view = *viewSet.begin();
 
     using namespace Dimension;
 
