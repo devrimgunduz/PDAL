@@ -48,12 +48,8 @@ class Options;
 class PDAL_DLL PipelineManager
 {
 public:
-    PipelineManager()
-        : m_factory()
-        , m_table(new DefaultPointTable())
-        , m_viewSet()
-        , m_stages()
-    {}
+    PipelineManager() : m_table(new DefaultPointTable()) {}
+    PipelineManager(PointTablePtr table) : m_table(table) {}
 
     // Use these to manually add stages into the pipeline manager.
     Stage& addReader(const std::string& type);
