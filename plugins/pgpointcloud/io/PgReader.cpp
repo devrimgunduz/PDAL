@@ -238,7 +238,7 @@ pdal::SpatialReference PgReader::fetchSpatialReference() const
 }
 
 
-void PgReader::ready(PointTablePtr /*table*/)
+void PgReader::ready(PointTableRef /*table*/)
 {
     m_atEnd = false;
     m_cur_row = 0;
@@ -256,7 +256,7 @@ void PgReader::ready(PointTablePtr /*table*/)
 }
 
 
-void PgReader::done(PointTablePtr /*table*/)
+void PgReader::done(PointTableRef /*table*/)
 {
     CursorTeardown();
     if (m_session)

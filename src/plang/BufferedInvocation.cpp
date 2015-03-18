@@ -54,7 +54,7 @@ BufferedInvocation::BufferedInvocation(const Script& script)
 
 void BufferedInvocation::begin(PointViewPtr view)
 {
-    PointLayoutPtr layout(view->m_pointTable->layout());
+    PointLayoutPtr layout(view->m_pointTable.layout());
     Dimension::IdList const& dims = layout->dims();
 
     for (auto di = dims.begin(); di != dims.end(); ++di)
@@ -85,7 +85,7 @@ void BufferedInvocation::end(PointViewPtr view)
     std::vector<std::string> names;
     getOutputNames(names);
 
-    PointLayoutPtr layout(view->m_pointTable->layout());
+    PointLayoutPtr layout(view->m_pointTable.layout());
     Dimension::IdList const& dims = layout->dims();
 
     for (auto di = dims.begin(); di != dims.end(); ++di)

@@ -125,12 +125,12 @@ void LasWriter::processOptions(const Options& options)
 }
 
 
-void LasWriter::prepared(PointTablePtr table)
+void LasWriter::prepared(PointTableRef table)
 {
     m_extraByteLen = 0;
     for (auto& dim : m_extraDims)
     {
-        dim.m_dimType.m_id = table->layout()->findDim(dim.m_name);
+        dim.m_dimType.m_id = table.layout()->findDim(dim.m_name);
         if (dim.m_dimType.m_id == Dimension::Id::Unknown)
         {
             std::ostringstream oss;
@@ -220,17 +220,17 @@ void LasWriter::getVlrOptions(const Options& opts)
 }
 
 
-void LasWriter::ready(PointTablePtr table)
+void LasWriter::ready(PointTableRef table)
 {
     const SpatialReference& srs = getSpatialReference().empty() ?
-        table->spatialRef() : getSpatialReference();
+        table.spatialRef() : getSpatialReference();
 
     if (!m_ostream)
         m_ostream = FileUtils::createFile(m_filename, true);
     setVlrsFromMetadata();
     setVlrsFromSpatialRef(srs);
     setExtraBytesVlr();
-    fillHeader(table);
+    fillHeader();
 
     if (m_lasHeader.compressed())
         readyCompression();
@@ -427,7 +427,7 @@ void LasWriter::addVlr(const std::string& userId, uint16_t recordId,
 
 /// Fill the LAS header with values as provided in options or forwarded
 /// metadata.
-void LasWriter::fillHeader(PointTablePtr table)
+void LasWriter::fillHeader()
 {
     m_lasHeader.setScale(m_xXform.m_scale, m_yXform.m_scale,
         m_zXform.m_scale);
@@ -675,7 +675,7 @@ point_count_t LasWriter::fillWriteBuf(const PointView& view,
     return blocksize;
 }
 
-void LasWriter::done(PointTablePtr table)
+void LasWriter::done(PointTableRef table)
 {
     //ABELL - The zipper has to be closed right after all the points
     // are written or bad things happen since this call expects the

@@ -66,14 +66,14 @@ public:
 
 private:
     virtual void processOptions(const Options&);
-    virtual void ready(PointTablePtr table);
+    virtual void ready(PointTableRef table);
     virtual void write(const PointViewPtr view);
-    virtual void done(PointTablePtr table);
+    virtual void done(PointTableRef table);
 
-    void writeHeader(PointTablePtr table);
+    void writeHeader(PointTableRef table);
     void writeFooter();
     void writeGeoJSONHeader();
-    void writeCSVHeader(PointTablePtr table);
+    void writeCSVHeader(PointTableRef table);
 
     void writeGeoJSONBuffer(const PointViewPtr view);
     void writeCSVBuffer(const PointViewPtr view);

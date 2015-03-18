@@ -219,7 +219,7 @@ bool WriteUnprojectedData()
     Option filename("filename", Support::datapath("autzen/autzen-utm.las"), "");
     options.add(filename);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     StageFactory f;
     std::unique_ptr<Stage> reader(f.createStage("readers.las"));
@@ -276,7 +276,7 @@ void compareAgainstSourceBuffer(const PointViewPtr candidate,
     Option fn("filename", filename);
     options.add(fn);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     StageFactory f;
     std::unique_ptr<Stage> reader(f.createStage("readers.las"));
     EXPECT_TRUE(reader.get());
@@ -360,7 +360,7 @@ TEST_F(OCITest, read_unprojected_data)
     EXPECT_TRUE(reader.get());
 
     reader->setOptions(options);
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     reader->prepare(table);
     PointViewSet viewSet = reader->execute(table);
     EXPECT_EQ(viewSet.size(), 1u);

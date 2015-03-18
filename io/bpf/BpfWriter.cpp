@@ -100,9 +100,9 @@ void BpfWriter::processOptions(const Options& options)
 }
 
 
-void BpfWriter::ready(PointTablePtr table)
+void BpfWriter::ready(PointTableRef table)
 {
-    loadBpfDimensions(table->layout());
+    loadBpfDimensions(table.layout());
     m_stream = FileUtils::createFile(m_filename, true);
     m_header.m_version = 3;
     m_header.m_numDim = m_dims.size();
@@ -280,7 +280,7 @@ double BpfWriter::getAdjustedValue(const PointView* data,
 }
 
 
-void BpfWriter::done(PointTablePtr)
+void BpfWriter::done(PointTableRef)
 {
     // Rewrite the header to update the the correct number of points and
     // statistics.

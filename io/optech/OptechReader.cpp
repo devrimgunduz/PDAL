@@ -150,7 +150,7 @@ void OptechReader::addDimensions(PointLayoutPtr layout)
 }
 
 
-void OptechReader::ready(PointTablePtr table)
+void OptechReader::ready(PointTableRef)
 {
     m_istream.reset(new IStream(m_filename));
     if (!*m_istream)
@@ -271,7 +271,7 @@ size_t OptechReader::fillBuffer()
 }
 
 
-void OptechReader::done(PointTablePtr /*table*/)
+void OptechReader::done(PointTableRef)
 {
     m_istream.reset();
 }

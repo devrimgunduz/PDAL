@@ -99,7 +99,7 @@ void PCLKernel::addSwitches()
 
 int PCLKernel::execute()
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     Options readerOptions;
     readerOptions.add<std::string>("filename", m_inputFile);

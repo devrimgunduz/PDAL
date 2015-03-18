@@ -130,11 +130,11 @@ void ReprojectionFilter::initialize()
     pdal::GlobalEnvironment::get().getGDALDebug()->addLog(log());
 }
 
-void ReprojectionFilter::ready(PointTablePtr table)
+void ReprojectionFilter::ready(PointTableRef table)
 {
     if (m_inferInputSRS)
     {
-        m_inSRS = table->spatialRef();
+        m_inSRS = table.spatialRef();
         if (m_inSRS.getWKT().empty())
             throw pdal_error("Source data has no spatial reference and none "
                 "is specified with the 'in_srs' option.");

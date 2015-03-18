@@ -51,8 +51,6 @@ public:
     std::string getName() const;
 
 private:
-    virtual void processOptions(const Options&) {};
-    virtual void ready(PointTablePtr table) {};
     virtual void write(const PointViewPtr view);
 
     PclVisualizer& operator=(const PclVisualizer&); // not implemented

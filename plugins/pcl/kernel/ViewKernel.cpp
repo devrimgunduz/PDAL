@@ -163,7 +163,7 @@ int ViewKernel::execute()
     Stage& readerStage(Kernel::makeReader(m_inputFile));
     readerStage.setOptions(readerOptions);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     readerStage.prepare(table);
     PointViewSet viewSetIn = readerStage.execute(table);
 

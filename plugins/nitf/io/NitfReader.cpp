@@ -111,7 +111,7 @@ void NitfReader::initialize()
 }
 
 
-void NitfReader::ready(PointTablePtr table)
+void NitfReader::ready(PointTableRef table)
 {
 #if 0
     // When combined with setting REQUIRE_LIDAR_SEGMENTS, this little

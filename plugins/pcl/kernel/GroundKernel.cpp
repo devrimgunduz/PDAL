@@ -110,7 +110,7 @@ void GroundKernel::addSwitches()
 
 int GroundKernel::execute()
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     Options readerOptions;
     readerOptions.add<std::string>("filename", m_inputFile);

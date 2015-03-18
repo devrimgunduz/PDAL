@@ -71,7 +71,7 @@ Options PredicateFilter::getDefaultOptions()
 }
 
 
-void PredicateFilter::ready(PointTablePtr table)
+void PredicateFilter::ready(PointTableRef table)
 {
     m_script = new plang::Script(m_source, m_module, m_function);
     m_pythonMethod = new plang::BufferedInvocation(*m_script);
@@ -106,7 +106,7 @@ PointViewSet PredicateFilter::run(PointViewPtr view)
 }
 
 
-void PredicateFilter::done(PointTablePtr table)
+void PredicateFilter::done(PointTableRef table)
 {
     GlobalEnvironment::get().getPythonEnvironment().reset_stdout();
     delete m_pythonMethod;

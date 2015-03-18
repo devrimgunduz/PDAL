@@ -87,7 +87,7 @@ TEST(ProgrammableFilterTest, ProgrammableFilterTest_test1)
     std::unique_ptr<StatsFilter> stats(new StatsFilter);
     stats->setInput(*filter);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     stats->prepare(table);
     PointViewSet viewSet = stats->execute(table);
@@ -162,14 +162,16 @@ TEST(ProgrammableFilterTest, add_dimension)
     filter->setOptions(opts);
     filter->setInput(reader);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     filter->prepare(table);
     PointViewSet viewSet = filter->execute(table);
     EXPECT_EQ(viewSet.size(), 1u);
     PointViewPtr view = *viewSet.begin();
 
-    pdal::Dimension::Id::Enum int_id = table->layout()->findDim("AddedIntensity");
-    pdal::Dimension::Id::Enum psid_id = table->layout()->findDim("AddedPointSourceId");
+    PointLayoutPtr layout(table.layout());
+
+    Dimension::Id::Enum int_id = layout->findDim("AddedIntensity");
+    Dimension::Id::Enum psid_id = layout->findDim("AddedPointSourceId");
 
     for (unsigned int i = 0; i < view->size(); ++i)
     {

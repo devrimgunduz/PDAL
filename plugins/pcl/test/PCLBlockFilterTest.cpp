@@ -53,10 +53,9 @@ TEST(PCLBlockFilterTest, PCLBlockFilterTest_example_passthrough_xml)
 
     PipelineManager pipeline;
     PipelineReader pipelineReader(pipeline);
-    pipelineReader.readPipeline(Support::datapath("filters/pcl/passthrough.xml"));
-
+    pipelineReader.readPipeline(
+        Support::datapath("filters/pcl/passthrough.xml"));
     pipeline.execute();
-    PointTablePtr table = pipeline.pointTable();
 
     PointViewSet viewSet = pipeline.views();
     EXPECT_EQ(viewSet.size(), 1u);
@@ -97,7 +96,7 @@ static void test_filter(const std::string& jsonFile,
     pcl_block->setOptions(filter_options);
     pcl_block->setInput(*reader);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     pcl_block->prepare(table);
     PointViewSet viewSet = pcl_block->execute(table);
 

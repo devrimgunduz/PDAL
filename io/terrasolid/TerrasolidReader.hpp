@@ -128,9 +128,9 @@ private:
 
     virtual void initialize();
     virtual void addDimensions(PointLayoutPtr layout);
-    virtual void ready(PointTablePtr table);
+    virtual void ready(PointTableRef table);
     virtual point_count_t read(PointViewPtr view, point_count_t count);
-    virtual void done(PointTablePtr table);
+    virtual void done(PointTableRef table);
     virtual bool eof()
         { return m_index >= getNumPoints(); }
 

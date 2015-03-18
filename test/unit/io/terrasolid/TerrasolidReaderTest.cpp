@@ -82,7 +82,7 @@ TEST(TerrasolidReader, Constructor)
 
 TEST_F(TerrasolidReaderTest, Header)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     m_reader.prepare(table);
     TerraSolidHeader header = m_reader.getHeader();
 
@@ -102,7 +102,7 @@ TEST_F(TerrasolidReaderTest, Header)
 
 TEST_F(TerrasolidReaderTest, ReadingPoints)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     m_reader.prepare(table);
     PointViewSet viewSet = m_reader.execute(table);
     EXPECT_EQ(viewSet.size(), 1u);

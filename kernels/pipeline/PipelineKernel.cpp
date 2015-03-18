@@ -109,7 +109,7 @@ int PipelineKernel::execute()
         }
     }
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     manager.getStage()->prepare(table);
     manager.getStage()->execute(table);
     if (m_pipelineFile.size() > 0)

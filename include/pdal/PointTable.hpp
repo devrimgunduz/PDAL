@@ -45,18 +45,34 @@
 namespace pdal
 {
 
-namespace plang
+class PDAL_DLL BasePointTable
 {
-    class BufferedInvocation;
-}
+    friend class PointView;
 
-class PDAL_DLL PointTable
-{
 public:
-    PointTable();
-    PointTable(PointLayoutPtr layout);
-    virtual ~PointTable();
+    BasePointTable() : m_layout(new PointLayout()), m_metadata(new Metadata())
+        {}
+    BasePointTable(PointLayoutPtr layout) : m_layout(layout),
+            m_metadata(new Metadata())
+        {}
+    virtual ~BasePointTable()
+        {}
 
+public:
+    // Layout operations.
+    PointLayoutPtr layout()
+        { return m_layout; }
+
+    const PointLayoutPtr layout() const
+        { return m_layout; }
+
+    // Metadata operations.
+    MetadataNode metadata()
+        { return m_metadata->getNode(); }
+    SpatialReference spatialRef() const;
+    void setSpatialRef(const SpatialReference& sref);
+
+private:
     // Point data operations.
     virtual PointId addPoint() = 0;
     virtual char *getPoint(PointId idx) = 0;
@@ -65,38 +81,28 @@ public:
     virtual void getField(const Dimension::Detail *d, PointId idx,
         void *value) = 0;
 
-    // Layout operations.
-    PointLayoutPtr layout();
-    const PointLayoutPtr layout() const;
-
-    // Metadata operations.
-    MetadataNode metadata();
-    SpatialReference spatialRef() const;
-    void setSpatialRef(const SpatialReference& sref);
-
 protected:
     PointLayoutPtr m_layout;
     MetadataPtr m_metadata;
 };
-
-
+typedef BasePointTable& PointTableRef;
 
 
 // This provides a context for processing a set of points and allows the library
 // to be used to process multiple point sets simultaneously.
-class PDAL_DLL DefaultPointTable : public PointTable
+class PDAL_DLL PointTable : public BasePointTable
 {
-    friend class PointView;
-    friend class plang::BufferedInvocation;
 private:
     // Point storage.
     std::vector<char *> m_blocks;
     point_count_t m_numPts;
 
 public:
-    DefaultPointTable();
-    DefaultPointTable(PointLayoutPtr layout);
-    virtual ~DefaultPointTable();
+    PointTable() : m_numPts(0)
+        {}
+    PointTable(PointLayoutPtr layout) : BasePointTable(layout), m_numPts(0)
+        {}
+    virtual ~PointTable();
 
 private:
     // Point data operations.
@@ -116,8 +122,6 @@ private:
     std::size_t pointsToBytes(point_count_t numPts)
         { return m_layout->pointSize() * numPts; }
 };
-
-typedef std::shared_ptr<PointTable> PointTablePtr;
 
 } //namespace
 

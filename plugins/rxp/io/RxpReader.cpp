@@ -119,7 +119,7 @@ void RxpReader::addDimensions(PointLayoutPtr layout)
 }
 
 
-void RxpReader::ready(PointTablePtr table)
+void RxpReader::ready(PointTableRef table)
 {
     m_pointcloud.reset(new RxpPointcloud(m_uri, m_syncToPps, m_minimal, table));
 }
@@ -132,7 +132,7 @@ point_count_t RxpReader::read(PointViewPtr view, point_count_t count)
 }
 
 
-void RxpReader::done(PointTablePtr table)
+void RxpReader::done(PointTableRef table)
 {
     m_pointcloud.reset();
 }

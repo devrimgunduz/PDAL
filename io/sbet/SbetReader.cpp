@@ -59,7 +59,7 @@ void SbetReader::addDimensions(PointLayoutPtr layout)
 }
 
 
-void SbetReader::ready(PointTablePtr /*table*/)
+void SbetReader::ready(PointTableRef)
 {
     size_t fileSize = FileUtils::fileSize(m_filename);
     size_t pointSize = getDefaultDimensions().size() * sizeof(double);

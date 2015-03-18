@@ -146,7 +146,7 @@ void ColorizationFilter::processOptions(const Options& options)
 }
 
 
-void ColorizationFilter::ready(PointTablePtr table)
+void ColorizationFilter::ready(PointTableRef table)
 {
     m_forward_transform.assign(0.0);
     m_inverse_transform.assign(0.0);
@@ -167,7 +167,7 @@ void ColorizationFilter::ready(PointTablePtr table)
     for (auto bi = m_bands.begin(); bi != m_bands.end(); ++bi)
     {
         if (bi->m_dim == Dimension::Id::Unknown)
-            bi->m_dim = table->layout()->findDim(bi->m_name);
+            bi->m_dim = table.layout()->findDim(bi->m_name);
         if (bi->m_dim == Dimension::Id::Unknown)
             throw pdal_error((std::string)"Can't colorize - no dimension " +
                 bi->m_name);
@@ -236,7 +236,7 @@ bool ColorizationFilter::getPixelAndLinePosition(double x, double y,
 }
 
 
-void ColorizationFilter::done(PointTablePtr /*table*/)
+void ColorizationFilter::done(PointTableRef /*table*/)
 {
     if (m_ds != 0)
     {

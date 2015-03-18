@@ -55,11 +55,11 @@ private:
     CpdKernel() {};
     void addSwitches();
     void validateSwitches();
-    PointViewPtr readFile(const std::string& filename, PointTablePtr table,
+    PointViewPtr readFile(const std::string& filename, PointTableRef table,
         arma::mat& mat);
     cpd::Registration::ResultPtr chipThenRegister(
         const cpd::NonrigidLowrank& reg, const arma::mat& X, const arma::mat& Y,
-        const PointViewPtr& bufX, const PointTablePtr table);
+        const PointViewPtr& bufX, const PointTableRef table);
 
     std::string m_filex;
     std::string m_filey;

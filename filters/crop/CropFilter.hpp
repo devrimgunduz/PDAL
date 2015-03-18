@@ -79,9 +79,9 @@ private:
 #endif
 
     virtual void processOptions(const Options& options);
-    virtual void ready(PointTablePtr table);
+    virtual void ready(PointTableRef table);
     virtual PointViewSet run(PointViewPtr view);
-    virtual void done(PointTablePtr table);
+    virtual void done(PointTableRef table);
     void crop(PointView& input, PointView& output);
     BOX3D computeBounds(GEOSGeometry const *geometry);
 

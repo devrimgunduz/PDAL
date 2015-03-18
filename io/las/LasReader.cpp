@@ -180,7 +180,7 @@ void LasReader::initialize()
 }
 
 
-void LasReader::ready(PointTablePtr table, MetadataNode& m)
+void LasReader::ready(PointTableRef table, MetadataNode& m)
 {
     m_index = 0;
 
@@ -805,7 +805,7 @@ void LasReader::loadExtraDims(LeExtractor& istream, PointView& data,
 }
 
 
-void LasReader::done(PointTablePtr table)
+void LasReader::done(PointTableRef)
 {
 #ifdef PDAL_HAVE_LASZIP
     m_zipPoint.reset();

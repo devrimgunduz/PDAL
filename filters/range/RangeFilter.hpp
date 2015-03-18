@@ -70,7 +70,7 @@ private:
     std::map<Dimension::Id::Enum, Range> m_dimensions_map;
 
     virtual void processOptions(const Options&options);
-    virtual void ready(PointTablePtr table);
+    virtual void ready(PointTableRef table);
     virtual PointViewSet run(PointViewPtr view);
 
     RangeFilter& operator=(const RangeFilter&); // not implemented

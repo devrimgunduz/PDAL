@@ -80,9 +80,9 @@ void StatsFilter::filter(PointViewPtr view)
 }
 
 
-void StatsFilter::done(PointTablePtr table)
+void StatsFilter::done(PointTableRef table)
 {
-    extractMetadata(table);
+    extractMetadata();
 }
 
 void StatsFilter::processOptions(const Options& options)
@@ -91,18 +91,18 @@ void StatsFilter::processOptions(const Options& options)
 }
 
 
-void StatsFilter::ready(PointTablePtr table)
+void StatsFilter::ready(PointTableRef table)
 {
     using namespace std;
-    const PointLayout& layout(*table->layout().get());
+    PointLayoutPtr layout(table.layout());
 
     std::vector<Dimension::Id::Enum> dims;
     std::vector<std::string> dimNames;
     if (m_dimNames.empty())
     {
-        dims = layout.dims();
+        dims = layout->dims();
         for (auto di = dims.begin(); di != dims.end(); ++di)
-            dimNames.push_back(layout.dimName(*di));
+            dimNames.push_back(layout->dimName(*di));
     }
     else
     {
@@ -111,7 +111,7 @@ void StatsFilter::ready(PointTablePtr table)
         dimNames = Utils::split2(m_dimNames, splits);
         for (auto di = dimNames.begin(); di != dimNames.end(); ++di)
         {
-            auto dim = layout.findDim(*di);
+            auto dim = layout->findDim(*di);
             if (dim != Dimension::Id::Unknown)
                 dims.push_back(dim);
         }
@@ -123,7 +123,7 @@ void StatsFilter::ready(PointTablePtr table)
 }
 
 
-void StatsFilter::extractMetadata(PointTablePtr /*table*/)
+void StatsFilter::extractMetadata()
 {
     uint32_t position(0);
 

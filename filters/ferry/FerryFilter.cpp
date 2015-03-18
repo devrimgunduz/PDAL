@@ -94,15 +94,15 @@ void FerryFilter::processOptions(const Options& options)
 }
 void FerryFilter::addDimensions(PointLayoutPtr layout)
 {
-    for(const auto& dim_par : m_name_map)
+    for (const auto& dim_par : m_name_map)
     {
         layout->registerOrAssignDim(dim_par.second, Dimension::Type::Double);
     }
 }
 
-void FerryFilter::ready(PointTablePtr table)
+void FerryFilter::ready(PointTableRef table)
 {
-    const PointLayoutPtr layout(table->layout());
+    const PointLayoutPtr layout(table.layout());
     for (const auto& dim_par : m_name_map)
     {
         Dimension::Id::Enum f = layout->findDim(dim_par.first);

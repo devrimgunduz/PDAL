@@ -97,7 +97,7 @@ void GreyhoundReader::addDimensions(PointLayoutPtr layout)
     m_layout = layout;
 }
 
-void GreyhoundReader::ready(PointTablePtr)
+void GreyhoundReader::ready(PointTableRef)
 {
     // Get number of points.
     exchanges::GetNumPoints numPointsExchange(m_sessionId);

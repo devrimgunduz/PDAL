@@ -145,12 +145,12 @@ TEST(XMLSchemaTest, copy)
 
     XMLSchema s1(xml, xsd);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     XMLDimList dims = s1.xmlDims();
     for (auto di = dims.begin(); di != dims.end(); ++di)
     {
         Dimension::Id::Enum id =
-            table->layout()->registerOrAssignDim(
+            table.layout()->registerOrAssignDim(
                     di->m_name,
                     di->m_dimType.m_type);
         s1.setId(di->m_name, id);

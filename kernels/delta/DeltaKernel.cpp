@@ -279,7 +279,7 @@ void DeltaKernel::outputXML(boost::property_tree::ptree const& tree) const
 
 int DeltaKernel::execute()
 {
-    PointTablePtr sourceTable(new DefaultPointTable());
+    PointTable sourceTable;
     Options sourceOptions;
     {
         sourceOptions.add<std::string>("filename", m_sourceFile);
@@ -294,7 +294,7 @@ int DeltaKernel::execute()
     PointViewPtr sourceView = *viewSet.begin();
     point_count_t sourceCount = sourceView->size();
 
-    PointTablePtr candidateTable(new DefaultPointTable());
+    PointTable candidateTable;
     Options candidateOptions;
     {
         candidateOptions.add("filename", m_candidateFile);

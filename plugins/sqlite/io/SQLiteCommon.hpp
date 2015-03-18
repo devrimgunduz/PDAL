@@ -119,7 +119,6 @@ public:
     point_count_t count;
     point_count_t remaining;
 
-    PointTablePtr m_table;
     MetadataNode m_metadata;
     bool m_isCompressed;
     std::string m_compVersion;

@@ -99,7 +99,7 @@ TEST(IcebridgeReaderTest, testRead)
     Options options(filename);
     reader->setOptions(options);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     reader->prepare(table);
     PointViewSet viewSet = reader->execute(table);
     EXPECT_EQ(viewSet.size(), 1u);

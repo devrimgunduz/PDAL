@@ -177,7 +177,7 @@ void optionsWrite(const Options& writerOps)
     writer->setOptions(writerOps);
     writer->setInput(*reader);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     writer->prepare(table);
 
     PointViewSet written = writer->execute(table);
@@ -213,13 +213,13 @@ TEST_F(PgpointcloudWriterTest, writeXYZ)
 
     optionsWrite(ops);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     std::unique_ptr<Stage> reader(
         StageFactory().createStage("readers.pgpointcloud"));
     reader->setOptions(getDbOptions());
 
     reader->prepare(table);
-    Dimension::IdList dims = table->layout()->dims();
+    Dimension::IdList dims = table.layout()->dims();
     EXPECT_EQ(dims.size(), (size_t)3);
     EXPECT_TRUE(Utils::contains(dims, Dimension::Id::X));
     EXPECT_TRUE(Utils::contains(dims, Dimension::Id::Y));
@@ -246,7 +246,7 @@ TEST_F(PgpointcloudWriterTest, writetNoPointcloudExtension)
     writer->setOptions(getDbOptions());
     writer->setInput(*reader);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     writer->prepare(table);
 
     EXPECT_THROW(writer->execute(table), pdal_error);

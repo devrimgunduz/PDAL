@@ -112,7 +112,7 @@ TEST(RxpReaderTest, testRead)
     RxpReader reader;
     reader.setOptions(options);
 
-    PointTablePtr table;
+    PointTable table;
     reader.prepare(table);
 
     PointViewSet viewSet = reader.execute(table);
@@ -136,7 +136,7 @@ TEST(RxpReaderTest, testNoPpsSync)
     RxpReader reader;
     reader.setOptions(options);
 
-    PointTablePtr table;
+    PointTable table;
     reader.prepare(table);
 
     PointViewSet viewSet = reader.execute(table);

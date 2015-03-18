@@ -64,9 +64,9 @@ private:
     bool m_outputTesselation;
 
     virtual void processOptions(const Options& options);
-    virtual void ready(PointTablePtr table);
+    virtual void ready(PointTableRef table);
     virtual void filter(PointViewPtr view);
-    virtual void done(PointTablePtr table);
+    virtual void done(PointTableRef table);
 
     HexBin& operator=(const HexBin&); // not implemented
     HexBin(const HexBin&); // not implemented

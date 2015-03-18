@@ -37,7 +37,6 @@
 #include <pdal/pdal_internal.hpp>
 #include <pdal/Options.hpp>
 #include <pdal/Metadata.hpp>
-#include <pdal/PointTable.hpp>
 
 #include <string>
 

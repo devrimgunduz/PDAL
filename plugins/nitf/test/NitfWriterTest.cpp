@@ -163,7 +163,7 @@ TEST(NitfWriterTest, test1)
             // writer.setGeneratingSoftware("PDAL-NITF");
             // writer.setChunkSize(100);
         }
-        PointTablePtr table(new DefaultPointTable());
+        PointTable table;
         writer->prepare(table);
         writer->execute(table);
     }

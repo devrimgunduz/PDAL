@@ -64,9 +64,9 @@ private:
     BpfDimensionList m_dims;
 
     virtual void processOptions(const Options& options);
-    virtual void ready(PointTablePtr table);
+    virtual void ready(PointTableRef table);
     virtual void write(const PointViewPtr data);
-    virtual void done(PointTablePtr table);
+    virtual void done(PointTableRef table);
 
     double getAdjustedValue(const PointView* data, BpfDimension& bpfDim,
         PointId idx);

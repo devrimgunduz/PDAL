@@ -361,7 +361,7 @@ void Kernel::visualize(PointViewPtr view)
     Stage& writer = ownStage(f.createStage("writers.pclvisualizer"));
     writer.setInput(bufferReader);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     writer.prepare(table);
     writer.execute(table);
 }

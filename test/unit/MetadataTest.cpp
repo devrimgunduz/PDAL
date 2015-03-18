@@ -289,7 +289,7 @@ TEST(MetadataTest, test_metadata_stage)
 {
 //ABELL
 /**
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     LasReader reader(Support::datapath("interesting.las"));
     reader.prepare(table);
@@ -299,7 +299,7 @@ TEST(MetadataTest, test_metadata_stage)
     EXPECT_EQ(file_metadata.toPTree().get_child("metadata").size(),
         32);
 
-    PointTablePtr readerTable(new DefaultPointTable());
+    PointTable readerTable;
     PipelineManager mgr;
     PipelineReader specReader(mgr);
     specReader.readPipeline(

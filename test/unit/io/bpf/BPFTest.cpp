@@ -73,7 +73,7 @@ template<typename LeftIter, typename RightIter>
 
 void test_file_type(const std::string& filename)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     Options ops;
 
@@ -134,7 +134,7 @@ void test_roundtrip(Options& writerOps)
     std::string outfile(Support::temppath("tmp.bpf"));
 
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     Options readerOps;
 

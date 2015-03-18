@@ -69,9 +69,9 @@ TEST(LasWriterTest, auto_offset)
     using namespace Dimension;
 
     const std::string FILENAME(Support::temppath("offset_test.las"));
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
-    table->layout()->registerDim(Id::X);
+    table.layout()->registerDim(Id::X);
 
     PointViewPtr view(new PointView(table));
     view->setField(Id::X, 0, 125000.00);
@@ -94,7 +94,7 @@ TEST(LasWriterTest, auto_offset)
     Options readerOps;
     readerOps.add("filename", FILENAME);
 
-    PointTablePtr readTable(new DefaultPointTable());
+    PointTable readTable;
 
     LasReader reader;
     reader.setOptions(readerOps);
@@ -126,7 +126,7 @@ TEST(LasWriterTest, extra_dims)
     writer.setInput(reader);
     writer.setOptions(writerOps);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     writer.prepare(table);
     PointViewSet viewSet = writer.execute(table);
 
@@ -155,15 +155,15 @@ TEST(LasWriterTest, extra_dims)
     std::shared_ptr<LasReader> reader2(new LasReader);
     reader2->setOptions(reader2Ops);
 
-    PointTablePtr readTable(new DefaultPointTable());
+    PointTable readTable;
     reader2->prepare(readTable);
     viewSet = reader2->execute(readTable);
     pb = *viewSet.begin();
-    Dimension::Id::Enum r1 = readTable->layout()->findDim("R1");
+    Dimension::Id::Enum r1 = readTable.layout()->findDim("R1");
     EXPECT_TRUE(r1 != Dimension::Id::Unknown);
-    Dimension::Id::Enum b1 = readTable->layout()->findDim("B1");
+    Dimension::Id::Enum b1 = readTable.layout()->findDim("B1");
     EXPECT_TRUE(b1 != Dimension::Id::Unknown);
-    Dimension::Id::Enum g1 = readTable->layout()->findDim("G1");
+    Dimension::Id::Enum g1 = readTable.layout()->findDim("G1");
     EXPECT_TRUE(g1 != Dimension::Id::Unknown);
     EXPECT_EQ(pb->size(), (size_t)1065);
     size_t j = 0;
@@ -193,7 +193,7 @@ TEST(LasWriterTest, metadata_options)
     LasWriter writer;
     writer.setOptions(ops);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     writer.prepare(table);
 
     MetadataNode m = writer.getMetadata();
@@ -250,7 +250,7 @@ bool diffdump(const std::string& f1, const std::string& f2)
 
 TEST(LasWriterTest, simple)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     std::string infile(Support::datapath("las/1.2-with-color.las"));
     std::string outfile(Support::temppath("simple.las"));
@@ -282,7 +282,7 @@ TEST(LasWriterTest, simple)
 /**
 TEST(LasWriterTest, LasWriterTest_test_simple_laz)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     WriterOpts writerOpts;
     writerOpts.add("compressed", true);
@@ -334,7 +334,7 @@ TEST(LasWriterTest, LasWriterTest_test_simple_laz)
 static void test_a_format(const std::string& refFile, uint8_t majorVersion,
     uint8_t minorVersion, int pointFormat)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     // remove file from earlier run, if needed
     FileUtils::deleteFile("temp.las");
@@ -427,7 +427,7 @@ TEST(LasWriterTest, LasWriterTest_test_drop_extra_returns)
 {
     using namespace pdal;
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     // remove file from earlier run, if needed
     std::string temp_filename("temp-LasWriterTest_test_drop_extra_returns.las");
@@ -466,7 +466,7 @@ TEST(LasWriterTest, LasWriterTest_test_drop_extra_returns)
     std::shared_ptr<LasReader> reader2(new LasReader);
     reader2->setOptions(readerOptions);
 
-    PointTablePtr readTable(new DefaultPointTable());
+    PointTable readTable;
 
     reader2->prepare(readTable);
     PointViewSet viewSet = reader2->execute(readTable);

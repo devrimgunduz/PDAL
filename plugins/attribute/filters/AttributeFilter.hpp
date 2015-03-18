@@ -122,9 +122,8 @@ public:
 private:
     virtual void initialize();
     virtual void processOptions(const Options&);
-    virtual void ready(PointTablePtr table);
+    virtual void ready(PointTableRef table);
     virtual void filter(PointViewPtr view);
-    virtual void done(PointTablePtr table);
 
     AttributeFilter& operator=(const AttributeFilter&); // not implemented
     AttributeFilter(const AttributeFilter&); // not implemented

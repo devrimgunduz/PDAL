@@ -156,7 +156,7 @@ Dimension::IdList TerrasolidReader::getDefaultDimensions()
 }
 
 
-void TerrasolidReader::ready(PointTablePtr /*table*/)
+void TerrasolidReader::ready(PointTableRef)
 {
     m_istream.reset(new IStream(m_filename));
     // Skip to the beginning of points.
@@ -281,7 +281,7 @@ point_count_t TerrasolidReader::read(PointViewPtr view, point_count_t count)
 }
 
 
-void TerrasolidReader::done(PointTablePtr /*table*/)
+void TerrasolidReader::done(PointTableRef)
 {
     m_istream.reset();
 }

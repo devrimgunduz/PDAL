@@ -86,7 +86,7 @@ TEST(PredicateFilterTest, PredicateFilterTest_test1)
     stats->setOptions(statOpts);
     stats->setInput(*filter);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     stats->prepare(table);
     PointViewSet viewSet = stats->execute(table);
@@ -144,7 +144,7 @@ TEST(PredicateFilterTest, PredicateFilterTest_test2)
     stats->setOptions(statOpts);
     stats->setInput(*filter);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     stats->prepare(table);
     PointViewSet viewSet = stats->execute(table);
@@ -227,7 +227,7 @@ TEST(PredicateFilterTest, PredicateFilterTest_test3)
     stats->setOptions(statOpts);
     stats->setInput(*filter2);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     stats->prepare(table);
     stats->execute(table);
 
@@ -278,7 +278,7 @@ TEST(PredicateFilterTest, PredicateFilterTest_test4)
     filter->setOptions(opts);
     filter->setInput(reader);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     PointViewPtr buf(new PointView(table));
 
     filter->prepare(table);
@@ -333,7 +333,7 @@ TEST(PredicateFilterTest, PredicateFilterTest_test5)
     filter->setOptions(opts);
     filter->setInput(reader);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     filter->prepare(table);
 
     ASSERT_THROW(filter->execute(table), python_error);

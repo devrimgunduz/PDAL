@@ -52,7 +52,7 @@ TEST(RangeFilterTest, noDimension)
 {
     RangeFilter filter;
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     EXPECT_THROW(filter.prepare(table), pdal_error);
 }
 
@@ -64,7 +64,7 @@ TEST(RangeFilterTest, noRange)
     RangeFilter filter;
     filter.setOptions(rangeOps);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     EXPECT_THROW(filter.prepare(table), pdal_error);
 }
 
@@ -94,7 +94,7 @@ TEST(RangeFilterTest, singleDimension)
     filter.setOptions(rangeOps);
     filter.setInput(reader);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     filter.prepare(table);
     PointViewSet viewSet = filter.execute(table);
     PointViewPtr view = *viewSet.begin();
@@ -140,7 +140,7 @@ TEST(RangeFilterTest, multipleDimensions)
     filter.setOptions(rangeOps);
     filter.setInput(reader);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     filter.prepare(table);
     PointViewSet viewSet = filter.execute(table);
     PointViewPtr view = *viewSet.begin();
@@ -180,7 +180,7 @@ TEST(RangeFilterTest, onlyMin)
     filter.setOptions(rangeOps);
     filter.setInput(reader);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     filter.prepare(table);
     PointViewSet viewSet = filter.execute(table);
     PointViewPtr view = *viewSet.begin();
@@ -220,7 +220,7 @@ TEST(RangeFilterTest, onlyMax)
     filter.setOptions(rangeOps);
     filter.setInput(reader);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     filter.prepare(table);
     PointViewSet viewSet = filter.execute(table);
     PointViewPtr view = *viewSet.begin();
@@ -260,7 +260,7 @@ TEST(RangeFilterTest, equals)
     filter.setOptions(rangeOps);
     filter.setInput(reader);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     filter.prepare(table);
     PointViewSet viewSet = filter.execute(table);
     PointViewPtr view = *viewSet.begin();
@@ -296,7 +296,7 @@ TEST(RangeFilterTest, negativeValues)
     filter.setOptions(rangeOps);
     filter.setInput(reader);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     filter.prepare(table);
     PointViewSet viewSet = filter.execute(table);
     PointViewPtr view = *viewSet.begin();

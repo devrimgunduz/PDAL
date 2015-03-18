@@ -46,12 +46,12 @@ namespace
 
 TEST(ViewTest, test_basic)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     PointViewPtr view(new PointView(table));
 
-    table->layout()->registerDim(Dimension::Id::X);
-    table->layout()->registerDim(Dimension::Id::Y);
-    table->layout()->registerDim(Dimension::Id::Z);
+    table.layout()->registerDim(Dimension::Id::X);
+    table.layout()->registerDim(Dimension::Id::Y);
+    table.layout()->registerDim(Dimension::Id::Z);
 
     for (int i = 0; i < 20; ++i)
     {

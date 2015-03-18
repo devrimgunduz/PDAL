@@ -63,8 +63,8 @@ private:
     virtual void processOptions(const Options& options)
         { m_dimName = options.getValueOrThrow<std::string>("dimension"); }
 
-    virtual void ready(PointTablePtr table)
-        { m_dim = table->layout()->findDim(m_dimName); }
+    virtual void ready(PointTableRef table)
+        { m_dim = table.layout()->findDim(m_dimName); }
 
     virtual void filter(PointViewPtr view)
     {

@@ -59,9 +59,9 @@ protected:
     size_t readPoint(const PointView& view, PointId idx, char *outbuf);
 
 private:
-    virtual void prepared(PointTablePtr table);
-    virtual void ready(PointTablePtr table);
-    DimTypeList dimTypes(PointTablePtr table);
+    virtual void prepared(PointTableRef table);
+    virtual void ready(PointTableRef table);
+    DimTypeList dimTypes(PointTableRef table);
 
     DimTypeList m_dimTypes;
     int m_xPackedOffset;

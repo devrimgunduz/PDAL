@@ -58,9 +58,8 @@ private:
 
     virtual void initialize();
     virtual void processOptions(const Options& options);
-    virtual void ready(PointTablePtr view);
     virtual void write(const PointViewPtr view);
-    virtual void done(PointTablePtr table);
+    virtual void done(PointTableRef table);
 
     void writeInit();
     void writeTile(const PointViewPtr view);
@@ -97,7 +96,6 @@ private:
     bool m_is3d;
     bool m_doCompression;;
     PatchPtr m_patch;
-    PointTablePtr m_table;
 };
 
 } // namespaces

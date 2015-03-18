@@ -59,7 +59,7 @@ TEST(LogTest, test_one)
     opts.add(opt4);
 
     {
-        PointTablePtr table(new DefaultPointTable());
+        PointTable table;
 
         FauxReader reader;
         reader.setOptions(opts);
@@ -152,7 +152,7 @@ TEST(LogTest, test_two_a)
         yfilter->setOptions(yfilter_opts);
         yfilter->setInput(*xfilter);
 
-        PointTablePtr table(new DefaultPointTable());
+        PointTable table;
         yfilter->prepare(table);
         EXPECT_TRUE(true);
 
@@ -251,7 +251,7 @@ TEST(LogTest, test_two_b)
         yfilter->setOptions(yfilter_opts);
         yfilter->setInput(*xfilter);
 
-        PointTablePtr table(new DefaultPointTable());
+        PointTable table;
         yfilter->prepare(table);
 
         reader.log()->setLevel(LogLevel::Debug5);
@@ -336,7 +336,7 @@ TEST(LogTest, test_three)
         xfilter->setOptions(xfilter_opts);
         xfilter->setInput(reader);
 
-        PointTablePtr table(new DefaultPointTable());
+        PointTable table;
         xfilter->prepare(table);
         PointViewSet viewSet = xfilter->execute(table);
         EXPECT_EQ(viewSet.size(), 1u);

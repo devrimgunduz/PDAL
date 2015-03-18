@@ -113,7 +113,7 @@ private:
 
     virtual void processOptions(const Options& options);
     virtual void addDimensions(PointLayoutPtr layout);
-    virtual void ready(PointTablePtr table)
+    virtual void ready(PointTableRef table)
     {
         m_returnNum = 1;
         m_time = 0;

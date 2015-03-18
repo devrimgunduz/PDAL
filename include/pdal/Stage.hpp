@@ -76,8 +76,8 @@ public:
         processOptions(m_options);
         return inspect();
     }
-    void prepare(PointTablePtr table);
-    PointViewSet execute(PointTablePtr table);
+    void prepare(PointTableRef table);
+    PointViewSet execute(PointTableRef table);
 
     void setSpatialReference(SpatialReference const&);
     const SpatialReference& getSpatialReference() const;
@@ -110,7 +110,7 @@ public:
         { return std::string(); }
     static std::string s_getPluginVersion()
         { return std::string(); }
-    virtual boost::property_tree::ptree toPTree(PointTablePtr table) const
+    virtual boost::property_tree::ptree toPTree(PointTableRef table) const
         { return boost::property_tree::ptree(); }
 
     virtual StageSequentialIterator* createSequentialIterator() const
@@ -146,19 +146,19 @@ private:
         {}
     virtual void writerProcessOptions(const Options& /*options*/)
         {}
-    void l_initialize(PointTablePtr table);
-    void l_done(PointTablePtr table);
+    void l_initialize(PointTableRef table);
+    void l_done(PointTableRef table);
     virtual QuickInfo inspect()
         { return QuickInfo(); }
     virtual void initialize()
         {}
     virtual void addDimensions(PointLayoutPtr layout)
         { (void)layout; }
-    virtual void prepared(PointTablePtr table)
+    virtual void prepared(PointTableRef table)
         { (void)table; }
-    virtual void ready(PointTablePtr table)
+    virtual void ready(PointTableRef table)
         { (void)table; }
-    virtual void done(PointTablePtr table)
+    virtual void done(PointTableRef table)
         { (void)table; }
     virtual PointViewSet run(PointViewPtr view)
     {

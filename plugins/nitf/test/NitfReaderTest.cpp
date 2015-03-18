@@ -61,7 +61,7 @@ TEST(NitfReaderTest, test_one)
     nitf_opts.add("filename", Support::datapath("nitf/autzen-utm10.ntf"));
     nitf_opts.add("count", 750);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     std::shared_ptr<Stage> nitf_reader(f.createStage("readers.nitf"));
     EXPECT_TRUE(nitf_reader.get());
@@ -88,7 +88,7 @@ TEST(NitfReaderTest, test_one)
     las_opts.add("count", 750);
     las_opts.add("filename", Support::datapath("nitf/autzen-utm10.las"));
 
-    PointTablePtr table2(new DefaultPointTable());
+    PointTable table2;
 
     std::shared_ptr<Stage> las_reader(f.createStage("readers.las"));
     EXPECT_TRUE(las_reader.get());
@@ -125,7 +125,7 @@ TEST(NitfReaderTest, test_chipper)
     Option option("filename", Support::configuredpath("nitf/chipper.xml"));
     Options options(option);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     PipelineManager mgr;
     PipelineReader specReader(mgr);
@@ -153,7 +153,7 @@ TEST(NitfReaderTest, optionSrs)
 
     nitfOpts.add("spatialreference", sr);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     std::shared_ptr<Stage> nitfReader(f.createStage("readers.nitf"));
     EXPECT_TRUE(nitfReader.get());
@@ -171,5 +171,5 @@ TEST(NitfReaderTest, optionSrs)
 
     EXPECT_EQ(sr, nitfReader->getSpatialReference().getWKT());
     EXPECT_EQ("", writer.getSpatialReference().getWKT());
-    EXPECT_EQ(sr, table->spatialRef().getWKT());
+    EXPECT_EQ(sr, table.spatialRef().getWKT());
 }

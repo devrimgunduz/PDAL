@@ -324,7 +324,7 @@ Stage& TranslateKernel::makeTranslate(Options translateOptions, Stage& parent)
 
 int TranslateKernel::execute()
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     Options readerOptions;
     readerOptions.add("filename", m_inputFile);

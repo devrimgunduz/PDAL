@@ -190,7 +190,7 @@ namespace pdal
         }
     }
 
-    void GeoWaveWriter::ready(PointTablePtr table)
+    void GeoWaveWriter::ready(PointTableRef table)
     {
         // get a list of all the dimensions & their types
         Dimension::IdList all = table->layout()->dims();

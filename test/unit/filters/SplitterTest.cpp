@@ -61,7 +61,7 @@ TEST(SplitterTest, test_tile_filter)
     s.setOptions(o);
     s.setInput(r);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     PointViewPtr view(new PointView(table));
     s.prepare(table);
 

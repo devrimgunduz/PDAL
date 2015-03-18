@@ -108,7 +108,7 @@ void P2gWriter::processOptions(const Options& options)
 
 
 /*
-void P2gWriter::ready(PointTablePtr table)
+void P2gWriter::ready(PointTableRef table)
 {
     double min_x = (std::numeric_limits<double>::max)();
     double max_x = (std::numeric_limits<double>::min)();

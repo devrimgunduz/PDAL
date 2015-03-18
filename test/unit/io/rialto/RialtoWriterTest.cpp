@@ -48,7 +48,7 @@ TEST(RialtoWriterTest, testWriteHeaderOverwrite)
     writer->setOptions(wo);
     writer->setInput(*reader);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     writer->prepare(table);
     writer->execute(table);
 
@@ -85,7 +85,7 @@ TEST(RialtoWriterTest, testWriteHeaderNoOverwrite)
     writer->setOptions(wo);
     writer->setInput(*reader);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     writer->prepare(table);
     EXPECT_THROW(writer->execute(table), pdal_error);
 }

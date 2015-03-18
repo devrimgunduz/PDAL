@@ -35,17 +35,19 @@
 namespace pdal
 {
 
-DimTypeList DbWriter::dimTypes(PointTablePtr table)
+DimTypeList DbWriter::dimTypes(PointTableRef table)
 {
     using namespace Dimension;
 
+    PointLayoutPtr layout = table.layout();
+
     if (m_outputDims.empty())
-        return table->layout()->dimTypes();
+        return layout->dimTypes();
 
     DimTypeList dims;
     for (std::string& s : m_outputDims)
     {
-        DimType dt = table->layout()->findDimType(s);
+        DimType dt = layout->findDimType(s);
         if (dt.m_id == Id::Unknown)
         {
             std::ostringstream oss;
@@ -60,13 +62,13 @@ DimTypeList DbWriter::dimTypes(PointTablePtr table)
 
 
 // Placing this here allows validation of dimensions before execution begins.
-void DbWriter::prepared(PointTablePtr table)
+void DbWriter::prepared(PointTableRef table)
 {
     m_dimTypes = dimTypes(table);
 }
 
 
-void DbWriter::ready(PointTablePtr /*table*/)
+void DbWriter::ready(PointTableRef /*table*/)
 {
     using namespace Dimension;
 

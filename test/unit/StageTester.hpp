@@ -11,7 +11,7 @@ namespace pdal
 class StageTester
 {
 public:
-    static void initialize(std::shared_ptr<Stage> s, PointTablePtr table)
+    static void initialize(std::shared_ptr<Stage> s, PointTableRef table)
     {
         s->l_initialize(table);
         s->initialize();
@@ -20,9 +20,9 @@ public:
         { s.processOptions(options); }
     static void addDimensions(Stage& s, PointLayoutPtr layout)
         { s.addDimensions(layout); }
-    static void ready(Stage& s, PointTablePtr table)
+    static void ready(Stage& s, PointTableRef table)
         { s.ready(table); }
-    static void done(Stage& s, PointTablePtr table)
+    static void done(Stage& s, PointTableRef table)
     {
         s.l_done(table);
         s.done(table);

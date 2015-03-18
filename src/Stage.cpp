@@ -59,7 +59,7 @@ void Stage::Construct()
 }
 
 
-void Stage::prepare(PointTablePtr table)
+void Stage::prepare(PointTableRef table)
 {
     for (size_t i = 0; i < m_inputs.size(); ++i)
     {
@@ -70,13 +70,15 @@ void Stage::prepare(PointTablePtr table)
     processOptions(m_options);
     l_initialize(table);
     initialize();
-    addDimensions(table->layout());
+    addDimensions(table.layout());
     prepared(table);
 }
 
 
-PointViewSet Stage::execute(PointTablePtr table)
+PointViewSet Stage::execute(PointTableRef table)
 {
+    table.layout()->finalize();
+
     PointViewSet views;
     if (m_inputs.empty())
     {
@@ -114,9 +116,9 @@ PointViewSet Stage::execute(PointTablePtr table)
 }
 
 
-void Stage::l_initialize(PointTablePtr table)
+void Stage::l_initialize(PointTableRef table)
 {
-    m_metadata = table->metadata().add(getName());
+    m_metadata = table.metadata().add(getName());
 }
 
 
@@ -170,10 +172,10 @@ void Stage::l_processOptions(const Options& options)
 }
 
 
-void Stage::l_done(PointTablePtr table)
+void Stage::l_done(PointTableRef table)
 {
     if (!m_spatialReference.empty())
-        table->setSpatialRef(m_spatialReference);
+        table.setSpatialRef(m_spatialReference);
 }
 
 const SpatialReference& Stage::getSpatialReference() const

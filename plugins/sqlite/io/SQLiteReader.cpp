@@ -181,7 +181,7 @@ void SQLiteReader::addDimensions(PointLayoutPtr layout)
 }
 
 
-void SQLiteReader::ready(PointTablePtr table)
+void SQLiteReader::ready(PointTableRef table)
 {
     log()->get(LogLevel::Debug) << "Fetching schema object" << std::endl;
 
@@ -205,9 +205,8 @@ void SQLiteReader::ready(PointTablePtr table)
 
     XMLSchema schema(s.data);
     m_patch->m_metadata = schema.getMetadata();
-    m_patch->m_table = table;
 
-    loadSchema(table->layout(), schema);
+    loadSchema(table.layout(), schema);
 
     m_at_end = false;
     b_doneQuery = false;

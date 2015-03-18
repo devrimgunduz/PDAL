@@ -62,7 +62,7 @@ public:
             const std::string& uri,
             bool isSyncToPps,
             bool m_minimal,
-            PointTablePtr table);
+            PointTableRef table);
     virtual ~RxpPointcloud();
 
     point_count_t read(PointViewPtr view, point_count_t count);

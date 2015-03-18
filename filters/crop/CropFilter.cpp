@@ -105,7 +105,7 @@ void CropFilter::processOptions(const Options& options)
 }
 
 
-void CropFilter::ready(PointTablePtr /*table*/)
+void CropFilter::ready(PointTableRef /*table*/)
 {
 #ifdef PDAL_HAVE_GEOS
     if (!m_poly.empty())
@@ -276,7 +276,7 @@ void CropFilter::crop(PointView& input, PointView& output)
 }
 
 
-void CropFilter::done(PointTablePtr /*table*/)
+void CropFilter::done(PointTableRef /*table*/)
 {
 #ifdef PDAL_HAVE_GEOS
     if (m_geosPreparedGeometry)

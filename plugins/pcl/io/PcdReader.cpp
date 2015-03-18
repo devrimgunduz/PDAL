@@ -55,7 +55,7 @@ CREATE_SHARED_PLUGIN(1, 0, PcdReader, Reader, s_info)
 
 std::string PcdReader::getName() const { return s_info.name; }
 
-void PcdReader::ready(PointTablePtr table)
+void PcdReader::ready(PointTableRef table)
 {
     pcl::PCLPointCloud2 cloud;
     pcl::PCDReader r;

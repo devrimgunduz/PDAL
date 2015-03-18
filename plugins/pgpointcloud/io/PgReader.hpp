@@ -100,10 +100,10 @@ public:
 private:
     virtual void addDimensions(PointLayoutPtr layout);
     virtual void processOptions(const Options& options);
-    virtual void ready(PointTablePtr table);
+    virtual void ready(PointTableRef table);
     virtual void initialize();
     virtual point_count_t read(PointViewPtr view, point_count_t count);
-    virtual void done(PointTablePtr table);
+    virtual void done(PointTableRef table);
     virtual bool eof()
         { return m_atEnd; }
 

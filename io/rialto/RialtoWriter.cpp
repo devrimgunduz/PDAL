@@ -79,7 +79,7 @@ namespace
     void writeHeader(
             std::string dir,
             const PointViewPtr view,
-            PointTablePtr table,
+            PointTableRef table,
             const Rectangle& rect,
             int32_t xt,
             int32_t yt)
@@ -120,7 +120,7 @@ namespace
 
         fprintf(fp, "    \"numPoints\": %lu,\n", view->size());
 
-        const PointLayoutPtr layout(table->layout());
+        const PointLayoutPtr layout(table.layout());
         const size_t numDims = layout->dims().size();
         fprintf(fp, "    \"dimensions\": [\n");
 
@@ -171,9 +171,9 @@ Options RialtoWriter::getDefaultOptions()
     return options;
 }
 
-void RialtoWriter::ready(PointTablePtr table)
+void RialtoWriter::ready(PointTableRef table)
 {
-    m_table = table;
+    m_table = &table;
 
     if (FileUtils::directoryExists(m_filename))
     {
@@ -195,8 +195,8 @@ void RialtoWriter::ready(PointTablePtr table)
     Rectangle r00(-180, -90, 0, 90);
     Rectangle r10(0, -90, 180, 90);
     m_roots = new Tile*[2];
-    m_roots[0] = new Tile(0, 0, 0, r00, m_maxLevel, *m_table.get(), log());
-    m_roots[1] = new Tile(0, 1, 0, r10, m_maxLevel, *m_table.get(), log());
+    m_roots[0] = new Tile(0, 0, 0, r00, m_maxLevel, *m_table, log());
+    m_roots[1] = new Tile(0, 1, 0, r10, m_maxLevel, *m_table, log());
 }
 
 void RialtoWriter::write(const PointViewPtr view)
@@ -238,13 +238,13 @@ void RialtoWriter::write(const PointViewPtr view)
     writeHeader(
             m_filename,
             view,
-            m_table,
+            *m_table,
             m_rectangle,
             m_numTilesX,
             m_numTilesY);
 }
 
-void RialtoWriter::done(PointTablePtr table)
+void RialtoWriter::done(PointTableRef table)
 {
     delete m_roots[0];
     delete m_roots[1];

@@ -151,14 +151,12 @@ void DiffKernel::checkPoints(const PointView& source_data,
 
 int DiffKernel::execute()
 {
-    PointTablePtr sourceTable(new DefaultPointTable());
+    PointTable sourceTable;
 
     Options sourceOptions;
-    {
-        sourceOptions.add<std::string>("filename", m_sourceFile);
-        sourceOptions.add<bool>("debug", isDebug());
-        sourceOptions.add<uint32_t>("verbose", getVerboseLevel());
-    }
+    sourceOptions.add<std::string>("filename", m_sourceFile);
+    sourceOptions.add<bool>("debug", isDebug());
+    sourceOptions.add<uint32_t>("verbose", getVerboseLevel());
 
     Stage& source = makeReader(m_sourceFile);
     source.setOptions(sourceOptions);
@@ -167,13 +165,11 @@ int DiffKernel::execute()
 
     ptree errors;
 
-    PointTablePtr candidateTable(new DefaultPointTable());
+    PointTable candidateTable;
     Options candidateOptions;
-    {
-        candidateOptions.add<std::string>("filename", m_candidateFile);
-        candidateOptions.add<bool>("debug", isDebug());
-        candidateOptions.add<uint32_t>("verbose", getVerboseLevel());
-    }
+    candidateOptions.add<std::string>("filename", m_candidateFile);
+    candidateOptions.add<bool>("debug", isDebug());
+    candidateOptions.add<uint32_t>("verbose", getVerboseLevel());
 
     Stage& candidate = makeReader(m_candidateFile);
     candidate.setOptions(candidateOptions);
@@ -194,20 +190,21 @@ int DiffKernel::execute()
         errors.put("count.source", sourceView->size());
     }
 
-    MetadataNode source_metadata = sourceTable->metadata();
-    MetadataNode candidate_metadata = candidateTable->metadata();
+    MetadataNode source_metadata = sourceTable.metadata();
+    MetadataNode candidate_metadata = candidateTable.metadata();
     if (source_metadata != candidate_metadata)
     {
         std::ostringstream oss;
 
         oss << "Source and candidate files do not have the same metadata count";
         errors.put("metadata.error", oss.str());
-        errors.put_child("metadata.source", pdal::utils::toPTree(source_metadata));
-        errors.put_child("metadata.candidate", pdal::utils::toPTree(candidate_metadata));
+        errors.put_child("metadata.source", utils::toPTree(source_metadata));
+        errors.put_child("metadata.candidate",
+            utils::toPTree(candidate_metadata));
     }
 
-    if (candidateTable->layout()->dims().size() !=
-            sourceTable->layout()->dims().size())
+    if (candidateTable.layout()->dims().size() !=
+        sourceTable.layout()->dims().size())
     {
         std::ostringstream oss;
 

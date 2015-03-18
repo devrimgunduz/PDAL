@@ -46,7 +46,7 @@ using namespace pdal;
 
 TEST(ChipperTest, test_construction)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     Options ops1;
     std::string filename(Support::datapath("las/1.2-with-color.las"));
@@ -102,7 +102,7 @@ TEST(ChipperTest, test_construction)
 // Make sure things don't crash if the point buffer is empty.
 TEST(ChipperTest, empty_buffer)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     PointViewPtr view(new PointView(table));
 
     Options ops;

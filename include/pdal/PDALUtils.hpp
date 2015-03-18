@@ -86,9 +86,9 @@ inline ptree toPTree(MetadataNode const& node)
 }
 
 
-inline MetadataNode toMetadata(PointTablePtr table)
+inline MetadataNode toMetadata(PointTableRef table)
 {
-    const PointLayoutPtr layout(table->layout());
+    const PointLayoutPtr layout(table.layout());
     MetadataNode root;
 
     for (const auto& id : layout->dims())

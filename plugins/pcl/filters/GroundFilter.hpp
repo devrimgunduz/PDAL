@@ -49,7 +49,6 @@ class PointView;
 
 typedef std::shared_ptr<PointLayout> PointLayoutPtr;
 typedef std::shared_ptr<PointView> PointViewPtr;
-typedef std::shared_ptr<PointTable> PointTablePtr;
 
 class PDAL_DLL GroundFilter : public Filter
 {
@@ -72,7 +71,6 @@ private:
 
     virtual void addDimensions(PointLayoutPtr layout);
     virtual void processOptions(const Options& options);
-    virtual void ready(PointTablePtr table) {};
     virtual PointViewSet run(PointViewPtr view);
 
     GroundFilter& operator=(const GroundFilter&); // not implemented

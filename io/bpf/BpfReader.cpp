@@ -210,7 +210,7 @@ bool BpfReader::readPolarData()
 }
 
 
-void BpfReader::ready(PointTablePtr table)
+void BpfReader::ready(PointTableRef)
 {
     m_index = 0;
     m_start = m_stream.position();
@@ -230,7 +230,7 @@ void BpfReader::ready(PointTablePtr table)
 }
 
 
-void BpfReader::done(PointTablePtr)
+void BpfReader::done(PointTableRef)
 {
      delete m_stream.popStream();
 }

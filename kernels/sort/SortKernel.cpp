@@ -115,7 +115,7 @@ Stage& SortKernel::makeReader(Options readerOptions)
 
 int SortKernel::execute()
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     Options readerOptions;
     readerOptions.add("filename", m_inputFile);

@@ -223,7 +223,7 @@ namespace pdal
         return ids;
     }
 
-    void GeoWaveReader::ready(PointTablePtr table)
+    void GeoWaveReader::ready(PointTableRef table)
     {
         if (m_bounds.empty())
             return;
@@ -319,7 +319,7 @@ namespace pdal
         return numRead;
     }
 
-    void GeoWaveReader::done(PointTablePtr table)
+    void GeoWaveReader::done(PointTableRef table)
     {
         m_iterator.close();
     }

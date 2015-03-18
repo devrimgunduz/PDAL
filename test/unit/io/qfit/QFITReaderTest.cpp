@@ -75,7 +75,7 @@ TEST(QFITReaderTest, test_10_word)
     reader->setOptions(options);
     EXPECT_EQ(reader->getName(), "readers.qfit");
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     reader->prepare(table);
     PointViewSet viewSet = reader->execute(table);
     EXPECT_EQ(viewSet.size(), 1u);
@@ -98,7 +98,7 @@ TEST(QFITReaderTest, test_14_word)
     options.add("scale_z", 0.001f, "Z scale from mm to m");
     options.add("count", 3);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     std::shared_ptr<QfitReader> reader(new QfitReader);
     reader->setOptions(options);
     reader->prepare(table);

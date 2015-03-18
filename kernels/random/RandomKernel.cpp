@@ -170,7 +170,7 @@ int RandomKernel::execute()
     Stage& writer = makeWriter(m_outputFile, makeReader(readerOptions));
     writer.setOptions(writerOptions);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     UserCallback* callback;
     if (!getProgressShellCommand().size())

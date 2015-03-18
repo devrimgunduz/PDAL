@@ -87,7 +87,7 @@ void SmoothKernel::addSwitches()
 
 int SmoothKernel::execute()
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     Options readerOptions;
     readerOptions.add("filename", m_inputFile);

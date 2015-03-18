@@ -88,7 +88,7 @@ TEST(ColorizationFilterTest, ColorizationFilterTest_test_1)
     filter.setOptions(reader_options);
     filter.setInput(reader);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     filter.prepare(table);
     PointViewSet viewSet = filter.execute(table);

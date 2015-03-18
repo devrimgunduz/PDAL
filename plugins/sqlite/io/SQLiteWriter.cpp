@@ -131,14 +131,6 @@ void SQLiteWriter::initialize()
 }
 
 
-void SQLiteWriter::ready(PointTablePtr table)
-{
-    m_table = table;
-    m_patch->m_table = table;
-    DbWriter::ready(table);
-}
-
-
 void SQLiteWriter::write(const PointViewPtr view)
 {
     writeInit();
@@ -401,7 +393,7 @@ bool SQLiteWriter::IsValidGeometryWKT(std::string const& input) const
     return (!e);
 }
 
-void SQLiteWriter::done(PointTablePtr table)
+void SQLiteWriter::done(PointTableRef table)
 {
     if (m_doCreateIndex)
     {
@@ -530,7 +522,7 @@ void SQLiteWriter::writeTile(const PointViewPtr view)
         throw pdal_error("Can't compress without LAZperf.");
 #endif
 
-        size_t viewSize = view->size() * m_table->layout()->pointSize();
+        size_t viewSize = view->size() * view->pointSize();
         double percent = (double) m_patch->byte_size()/(double) viewSize;
         percent = percent * 100;
         log()->get(LogLevel::Debug3) << "Compressing tile by " <<

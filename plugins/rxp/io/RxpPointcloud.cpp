@@ -56,7 +56,7 @@ RxpPointcloud::RxpPointcloud(
         const std::string& uri,
         bool syncToPps,
         bool minimal,
-        PointTablePtr table)
+        PointTableRef table)
     : scanlib::pointcloud(syncToPps)
     , m_view(new PointView(table))
     , m_idx(0)

@@ -75,10 +75,10 @@ private:
 
     virtual void initialize();
     virtual void addDimensions(PointLayoutPtr layout);
-    virtual void ready(PointTablePtr table);
+    virtual void ready(PointTableRef table);
     virtual point_count_t read(PointViewPtr view, point_count_t num);
     size_t fillBuffer();
-    virtual void done(PointTablePtr table);
+    virtual void done(PointTableRef table);
 
     CsdHeader m_header;
     georeference::RotationMatrix m_boresightMatrix;

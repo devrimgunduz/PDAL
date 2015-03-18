@@ -37,35 +37,7 @@
 namespace pdal
 {
 
-PointTable::PointTable()
-    : m_layout(new PointLayout())
-    , m_metadata(new Metadata())
-{}
-
-PointTable::PointTable(PointLayoutPtr layout)
-    : m_layout(layout)
-    , m_metadata(new Metadata())
-{}
-
-PointTable::~PointTable()
-{}
-
-PointLayoutPtr PointTable::layout()
-{
-    return m_layout;
-}
-
-const PointLayoutPtr PointTable::layout() const
-{
-    return m_layout;
-}
-
-MetadataNode PointTable::metadata()
-{
-    return m_metadata->getNode();
-}
-
-SpatialReference PointTable::spatialRef() const
+SpatialReference BasePointTable::spatialRef() const
 {
     MetadataNode m = m_metadata->m_private.findChild("spatialreference");
     SpatialReference sref;
@@ -73,33 +45,21 @@ SpatialReference PointTable::spatialRef() const
     return sref;
 }
 
-void PointTable::setSpatialRef(const SpatialReference& sref)
+
+void BasePointTable::setSpatialRef(const SpatialReference& sref)
 {
     MetadataNode mp = m_metadata->m_private;
     mp.addOrUpdate("spatialreference", sref.getRawWKT());
 }
 
 
-
-DefaultPointTable::DefaultPointTable()
-    : PointTable()
-    , m_blocks()
-    , m_numPts(0)
-{}
-
-DefaultPointTable::DefaultPointTable(PointLayoutPtr layout)
-    : PointTable(layout)
-    , m_blocks()
-    , m_numPts(0)
-{}
-
-DefaultPointTable::~DefaultPointTable()
+PointTable::~PointTable()
 {
     for (auto vi = m_blocks.begin(); vi != m_blocks.end(); ++vi)
         delete [] *vi;
 }
 
-PointId DefaultPointTable::addPoint()
+PointId PointTable::addPoint()
 {
     if (m_numPts % m_blockPtCnt == 0)
     {
@@ -109,24 +69,21 @@ PointId DefaultPointTable::addPoint()
     return m_numPts++;
 }
 
-char *DefaultPointTable::getPoint(PointId idx)
+
+char *PointTable::getPoint(PointId idx)
 {
     char *buf = m_blocks[idx / m_blockPtCnt];
     return buf + pointsToBytes(idx % m_blockPtCnt);
 }
 
-void DefaultPointTable::setField(
-        const Dimension::Detail *d,
-        PointId idx,
-        const void *value)
+
+void PointTable::setField(const Dimension::Detail *d, PointId idx,
+    const void *value)
 {
     std::memcpy(getDimension(d, idx), value, d->size());
 }
 
-void DefaultPointTable::getField(
-        const Dimension::Detail *d,
-        PointId idx,
-        void *value)
+void PointTable::getField(const Dimension::Detail *d, PointId idx, void *value)
 {
     std::memcpy(value, getDimension(d, idx), d->size());
 }

@@ -121,7 +121,7 @@ TEST(LasReaderTest, test_base_options)
 
 TEST(LasReaderTest, header)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     Options ops;
     ops.add("filename", Support::datapath("las/simple.las"));
 
@@ -166,7 +166,7 @@ TEST(LasReaderTest, header)
 
 TEST(LasReaderTest, test_sequential)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     Options ops1;
     ops1.add("filename", Support::datapath("las/1.2-with-color.las"));
@@ -192,7 +192,7 @@ static void test_a_format(const std::string& file, uint8_t majorVersion,
     double xref, double yref, double zref, double tref,
     uint16_t rref,  uint16_t gref,  uint16_t bref)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     Options ops1;
     ops1.add("filename", Support::datapath(file));
@@ -274,7 +274,7 @@ TEST(LasReaderTest, inspect)
 /**
 TEST(LasReaderTest, test_vlr)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     Options ops1;
     ops1.add("filename", Support::datapath("las/lots_of_vlr.las"));
@@ -290,7 +290,7 @@ TEST(LasReaderTest, test_vlr)
 
 TEST(LasReaderTest, testInvalidFileSignature)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     Options ops1;
     ops1.add("filename", Support::datapath("las/1.2-with-color.las.wkt"));
@@ -302,8 +302,8 @@ TEST(LasReaderTest, testInvalidFileSignature)
 
 TEST(LasReaderTest, extraBytes)
 {
-    PointTablePtr table(new DefaultPointTable());
-    PointLayoutPtr layout(table->layout());
+    PointTable table;
+    PointLayoutPtr layout(table.layout());
 
     Options readOps;
     readOps.add("filename", Support::datapath("las/extrabytes.las"));
@@ -373,7 +373,7 @@ TEST(LasReaderTest, extraBytes)
 
 TEST(LasReaderTest, callback)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     point_count_t count = 0;
 
     Options ops;

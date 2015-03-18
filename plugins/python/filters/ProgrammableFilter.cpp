@@ -87,7 +87,7 @@ void ProgrammableFilter::addDimensions(PointLayoutPtr layout)
 }
 
 
-void ProgrammableFilter::ready(PointTablePtr table)
+void ProgrammableFilter::ready(PointTableRef table)
 {
     m_script = new plang::Script(m_source, m_module, m_function);
     m_pythonMethod = new plang::BufferedInvocation(*m_script);
@@ -108,7 +108,7 @@ void ProgrammableFilter::filter(PointViewPtr view)
 }
 
 
-void ProgrammableFilter::done(PointTablePtr table)
+void ProgrammableFilter::done(PointTableRef table)
 {
     GlobalEnvironment::get().getPythonEnvironment().reset_stdout();
     delete m_pythonMethod;

@@ -105,7 +105,7 @@ void TextWriter::processOptions(const Options& ops)
 }
 
 
-void TextWriter::ready(PointTablePtr table)
+void TextWriter::ready(PointTableRef table)
 {
     m_stream->precision(m_precision);
     *m_stream << std::fixed;
@@ -118,7 +118,7 @@ void TextWriter::ready(PointTablePtr table)
     tokenizer sdims(m_dimOrder, separator);
     for (tokenizer::iterator ti = sdims.begin(); ti != sdims.end(); ++ti)
     {
-        Dimension::Id::Enum d = table->layout()->findDim(*ti);
+        Dimension::Id::Enum d = table.layout()->findDim(*ti);
         if (d == Dimension::Id::Unknown)
         {
             std::ostringstream oss;
@@ -131,7 +131,7 @@ void TextWriter::ready(PointTablePtr table)
     // Yes, this isn't efficient when, but it's simple.
     if (m_dimOrder.empty() || m_writeAllDims)
     {
-        Dimension::IdList all = table->layout()->dims();
+        Dimension::IdList all = table.layout()->dims();
         for (auto di = all.begin(); di != all.end(); ++di)
             if (!contains(m_dims, *di))
                 m_dims.push_back(*di);
@@ -144,7 +144,7 @@ void TextWriter::ready(PointTablePtr table)
 }
 
 
-void TextWriter::writeHeader(PointTablePtr table)
+void TextWriter::writeHeader(PointTableRef table)
 {
     log()->get(LogLevel::Debug) << "Writing header to filename: " <<
         m_filename << std::endl;
@@ -175,9 +175,9 @@ void TextWriter::writeGeoJSONHeader()
 }
 
 
-void TextWriter::writeCSVHeader(PointTablePtr table)
+void TextWriter::writeCSVHeader(PointTableRef table)
 {
-    const PointLayoutPtr layout(table->layout());
+    const PointLayoutPtr layout(table.layout());
     for (auto di = m_dims.begin(); di != m_dims.end(); ++di)
     {
         if (di != m_dims.begin())
@@ -248,7 +248,7 @@ void TextWriter::write(const PointViewPtr view)
 }
 
 
-void TextWriter::done(PointTablePtr /*table*/)
+void TextWriter::done(PointTableRef /*table*/)
 {
     writeFooter();
 }

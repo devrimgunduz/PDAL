@@ -48,8 +48,10 @@ class Options;
 class PDAL_DLL PipelineManager
 {
 public:
-    PipelineManager() : m_table(new DefaultPointTable()) {}
-    PipelineManager(PointTablePtr table) : m_table(table) {}
+    PipelineManager() : m_tablePtr(new PointTable()), m_table(*m_tablePtr)
+        {}
+    PipelineManager(BasePointTable& table) : m_table(table)
+        {}
 
     // Use these to manually add stages into the pipeline manager.
     Stage& addReader(const std::string& type);
@@ -72,14 +74,16 @@ public:
         { return m_viewSet; }
 
     // Get the point table data.
-    PointTablePtr pointTable() const
+    PointTableRef pointTable() const
         { return m_table; }
 
     MetadataNode getMetadata() const;
 
 private:
     StageFactory m_factory;
-    PointTablePtr m_table;
+    std::unique_ptr<PointTable> m_tablePtr;
+    BasePointTable& m_table;
+    
     PointViewSet m_viewSet;
 
     typedef std::vector<std::unique_ptr<Stage> > StagePtrList;

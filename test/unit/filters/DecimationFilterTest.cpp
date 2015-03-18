@@ -66,7 +66,7 @@ TEST(DecimationFilterTest, DecimationFilterTest_test1)
     filter.setOptions(decimationOps);
     filter.setInput(reader);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     filter.prepare(table);
     PointViewSet viewSet = filter.execute(table);

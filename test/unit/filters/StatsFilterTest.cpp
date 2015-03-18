@@ -59,7 +59,7 @@ TEST(StatsFilterTest, simple)
     filter.setInput(*reader);
     EXPECT_EQ(filter.getName(), "filters.stats");
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     filter.prepare(table);
     filter.execute(table);
 
@@ -105,7 +105,7 @@ TEST(StatsFilterTest, dimset)
     filter.setOptions(filterOps);
     EXPECT_EQ(filter.getName(), "filters.stats");
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     filter.prepare(table);
     filter.execute(table);
 
@@ -146,7 +146,7 @@ TEST(StatsFilterTest, metadata)
     filter.setInput(*reader);
     filter.setOptions(filterOps);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     filter.prepare(table);
     filter.execute(table);
     MetadataNode m = filter.getMetadata();

@@ -115,7 +115,7 @@ TEST_F(TransformationFilterTest, NoChange)
     filterOpts.add("matrix", "1 0 0 0\n0 1 0 0\n0 0 1 0\n0 0 0 1");
     m_filter.setOptions(filterOpts);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     m_filter.prepare(table);
     PointViewSet viewSet = m_filter.execute(table);
     EXPECT_EQ(1u, viewSet.size());
@@ -137,7 +137,7 @@ TEST_F(TransformationFilterTest, Translation)
     filterOpts.add("matrix", "1 0 0 1\n0 1 0 2\n0 0 1 3\n0 0 0 1");
     m_filter.setOptions(filterOpts);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     m_filter.prepare(table);
     PointViewSet viewSet = m_filter.execute(table);
     PointViewPtr view = *viewSet.begin();
@@ -157,7 +157,7 @@ TEST_F(TransformationFilterTest, Rotation)
     filterOpts.add("matrix", "0 1 0 0\n-1 0 0 0\n0 0 1 0\n0 0 0 1");
     m_filter.setOptions(filterOpts);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     m_filter.prepare(table);
     PointViewSet viewSet = m_filter.execute(table);
     PointViewPtr view = *viewSet.begin();

@@ -109,10 +109,10 @@ private:
     StatsFilter& operator=(const StatsFilter&); // not implemented
     StatsFilter(const StatsFilter&); // not implemented
     virtual void processOptions(const Options& options);
-    virtual void ready(PointTablePtr table);
-    virtual void done(PointTablePtr table);
+    virtual void ready(PointTableRef table);
+    virtual void done(PointTableRef table);
     virtual void filter(PointViewPtr view);
-    void extractMetadata(PointTablePtr table);
+    void extractMetadata();
 
     std::string m_dimNames;
     std::map<Dimension::Id::Enum, stats::Summary> m_stats;

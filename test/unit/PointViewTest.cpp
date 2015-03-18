@@ -45,11 +45,13 @@
 
 using namespace pdal;
 
-PointViewPtr makeTestView(PointTablePtr table, point_count_t cnt = 17)
+PointViewPtr makeTestView(PointTableRef table, point_count_t cnt = 17)
 {
-    table->layout()->registerDim(Dimension::Id::Classification);
-    table->layout()->registerDim(Dimension::Id::X);
-    table->layout()->registerDim(Dimension::Id::Y);
+    PointLayoutPtr layout(table.layout());
+
+    layout->registerDim(Dimension::Id::Classification);
+    layout->registerDim(Dimension::Id::X);
+    layout->registerDim(Dimension::Id::Y);
 
     PointViewPtr view(new PointView(table));
 
@@ -88,14 +90,14 @@ void verifyTestView(const PointView& view, point_count_t cnt = 17)
 
 TEST(PointViewTest, getSet)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     PointViewPtr view = makeTestView(table, 1);
     verifyTestView(*view.get(), 1);
 }
 
 TEST(PointViewTest, getAsUint8)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     PointViewPtr view = makeTestView(table);
 
     // read the view back out
@@ -124,7 +126,7 @@ TEST(PointViewTest, getAsUint8)
 
 TEST(PointViewTest, getAsInt32)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     PointViewPtr view = makeTestView(table);
 
     // read the view back out
@@ -143,7 +145,7 @@ TEST(PointViewTest, getAsInt32)
 
 TEST(PointViewTest, getFloat)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     PointViewPtr view = makeTestView(table);
 
     // read the view back out
@@ -162,7 +164,7 @@ TEST(PointViewTest, getFloat)
 
 TEST(PointViewTest, copy)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     PointViewPtr view = makeTestView(table);
 
     PointView d2(*view);
@@ -195,7 +197,7 @@ TEST(PointViewTest, copy)
 
 TEST(PointViewTest, copyCtor)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     PointViewPtr view = makeTestView(table);
 
     PointView d2(*view);
@@ -204,7 +206,7 @@ TEST(PointViewTest, copyCtor)
 
 TEST(PointViewTest, assignment)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     PointViewPtr view = makeTestView(table);
 
     PointView d2 = *view;
@@ -214,7 +216,7 @@ TEST(PointViewTest, assignment)
 
 TEST(PointViewTest, metaview)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     PointViewPtr view = makeTestView(table, 2);
 
     std::stringstream ss1(std::stringstream::in | std::stringstream::out);
@@ -228,13 +230,16 @@ TEST(PointViewTest, metaview)
 
 TEST(PointViewTest, bigfile)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     point_count_t NUM_PTS = 1000000;
 
-    table->layout()->registerDim(Dimension::Id::X);
-    table->layout()->registerDim(Dimension::Id::Y);
-    table->layout()->registerDim(Dimension::Id::Z);
+    PointLayoutPtr layout(table.layout());
+
+    layout->registerDim(Dimension::Id::X);
+    layout->registerDim(Dimension::Id::Y);
+    layout->registerDim(Dimension::Id::Z);
+
     PointView view(table);
 
     std::cout << "SET" << std::endl;
@@ -379,10 +384,12 @@ TEST(PointViewTest, calcBounds)
         view->setField(Dimension::Id::Z, i, z);
     };
 
-    PointTablePtr table(new DefaultPointTable());
-    table->layout()->registerDim(Dimension::Id::X);
-    table->layout()->registerDim(Dimension::Id::Y);
-    table->layout()->registerDim(Dimension::Id::Z);
+    PointTable table;
+    PointLayoutPtr layout(table.layout());
+
+    layout->registerDim(Dimension::Id::X);
+    layout->registerDim(Dimension::Id::Y);
+    layout->registerDim(Dimension::Id::Z);
 
     const double lim_min = (std::numeric_limits<double>::lowest)();
     const double lim_max = (std::numeric_limits<double>::max)();
@@ -415,7 +422,7 @@ TEST(PointViewTest, calcBounds)
 /**
 TEST(PointViewTest, sort)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     PointView view(table);
     const PointId NUM_PTS = 10000;
 

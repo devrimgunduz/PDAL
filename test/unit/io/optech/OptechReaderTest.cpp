@@ -83,7 +83,7 @@ TEST(OptechReader, Constructor)
 
 TEST_F(OptechReaderTest, Header)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     m_reader.prepare(table);
     CsdHeader header = m_reader.getHeader();
 
@@ -111,7 +111,7 @@ TEST_F(OptechReaderTest, Header)
 
 TEST_F(OptechReaderTest, ReadingPoints)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     m_reader.prepare(table);
     PointViewSet viewSet = m_reader.execute(table);
     EXPECT_EQ(viewSet.size(), 1u);

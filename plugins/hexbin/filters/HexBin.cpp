@@ -63,7 +63,7 @@ void HexBin::processOptions(const Options& options)
 }
 
 
-void HexBin::ready(PointTablePtr table)
+void HexBin::ready(PointTableRef table)
 {
     if (m_edgeLength == 0.0)  // 0 can always be represented exactly.
     {
@@ -86,7 +86,7 @@ void HexBin::filter(PointViewPtr view)
 }
 
 
-void HexBin::done(PointTablePtr table)
+void HexBin::done(PointTableRef table)
 {
     m_grid->processSample();
     m_grid->findShapes();

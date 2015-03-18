@@ -208,7 +208,7 @@ void PgWriter::write(const PointViewPtr view)
 }
 
 
-void PgWriter::done(PointTablePtr /*table*/)
+void PgWriter::done(PointTableRef /*table*/)
 {
     //CreateIndex(m_schema_name, m_table_name, m_column_name);
 

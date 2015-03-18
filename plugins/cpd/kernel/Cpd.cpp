@@ -117,7 +117,8 @@ void CpdKernel::addSwitches()
 }
 
 
-PointViewPtr CpdKernel::readFile(const std::string& filename, PointTablePtr table, arma::mat& mat)
+PointViewPtr CpdKernel::readFile(const std::string& filename,
+    PointTableRef table, arma::mat& mat)
 {
     Options opt;
     opt.add<std::string>("filename", filename);
@@ -180,8 +181,8 @@ PointViewPtr CpdKernel::readFile(const std::string& filename, PointTablePtr tabl
 
 int CpdKernel::execute()
 {
-    PointTablePtr tableX(new DefaultPointTable());
-    PointTablePtr tableY(new DefaultPointTable());
+    PointTable tableX;
+    PointTable tableY;
 
     arma::mat X, Y;
     PointViewPtr viewX = readFile(m_filex, tableX, X);
@@ -210,15 +211,15 @@ int CpdKernel::execute()
     }
 
     cpd::Registration::ResultPtr result;
-    PointTablePtr outTable(new DefaultPointTable());
-    PointLayoutPtr outLayout(outTable->layout());
+    PointTable outTable;
+    PointLayoutPtr outLayout(outTable.layout());
     outLayout->registerDim(Dimension::Id::X);
     outLayout->registerDim(Dimension::Id::Y);
     outLayout->registerDim(Dimension::Id::Z);
     outLayout->registerDim(Dimension::Id::XVelocity);
     outLayout->registerDim(Dimension::Id::YVelocity);
     outLayout->registerDim(Dimension::Id::ZVelocity);
-    PointViewPtr outView(new PointView(outTable));
+    PointView outView(new PointView(outTable));
 
     if (m_chipped)
     {
@@ -286,7 +287,7 @@ arma::mat getChip(const arma::mat& X, const BOX3D& bounds)
 
 cpd::Registration::ResultPtr CpdKernel::chipThenRegister(
     const cpd::NonrigidLowrank& reg, const arma::mat& X, const arma::mat& Y,
-    const PointViewPtr& viewX, const PointTablePtr table)
+    const PointViewPtr& viewX, const PointTableRef table)
 {
     BufferReader reader;
     reader.addView(viewX);

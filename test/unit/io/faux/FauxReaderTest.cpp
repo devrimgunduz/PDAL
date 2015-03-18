@@ -49,7 +49,7 @@ TEST(FauxReaderTest, test_constant_mode_sequential_iter)
     std::shared_ptr<FauxReader> reader(new FauxReader);
     reader->setOptions(ops);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     reader->prepare(table);
     PointViewSet viewSet = reader->execute(table);
     EXPECT_EQ(viewSet.size(), 1u);
@@ -80,7 +80,7 @@ TEST(FauxReaderTest, test_random_mode)
     std::shared_ptr<FauxReader> reader(new FauxReader);
     reader->setOptions(ops);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     reader->prepare(table);
     PointViewSet viewSet = reader->execute(table);
     EXPECT_EQ(viewSet.size(), 1u);
@@ -119,7 +119,7 @@ TEST(FauxReaderTest, test_ramp_mode_1)
     std::shared_ptr<FauxReader> reader(new FauxReader);
     reader->setOptions(ops);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     reader->prepare(table);
     PointViewSet viewSet = reader->execute(table);
     EXPECT_EQ(viewSet.size(), 1u);
@@ -158,7 +158,7 @@ TEST(FauxReaderTest, test_ramp_mode_2)
     std::shared_ptr<FauxReader> reader(new FauxReader);
     reader->setOptions(ops);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     reader->prepare(table);
     PointViewSet viewSet = reader->execute(table);
     EXPECT_EQ(viewSet.size(), 1u);
@@ -196,7 +196,7 @@ TEST(FauxReaderTest, test_return_number)
     std::shared_ptr<FauxReader> reader(new FauxReader);
     reader->setOptions(ops);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     reader->prepare(table);
     PointViewSet viewSet = reader->execute(table);
     EXPECT_EQ(viewSet.size(), 1u);

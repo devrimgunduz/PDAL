@@ -143,7 +143,7 @@ TEST(SpatialReferenceTest, test_get_utmzone)
 // Test fetching SRS from an existing file
 TEST(SpatialReferenceTest, test_read_srs)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     Options ops;
     ops.add("filename", Support::datapath("las/utm17.las"));
@@ -185,7 +185,7 @@ TEST(SpatialReferenceTest, test_vertical_datums)
     const std::string wktCheck = ref.getWKT(SpatialReference::eCompoundOK);
     EXPECT_TRUE(wkt == wktCheck); // just to make sure
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     // Write a very simple file with our SRS and one point.
     Options ops1;
     ops1.add("filename", Support::datapath("las/1.2-with-color.las"));
@@ -205,7 +205,7 @@ TEST(SpatialReferenceTest, test_vertical_datums)
     SpatialReference sr = writer.getSpatialReference();
 
     // Reopen and check contents.
-    PointTablePtr table2(new DefaultPointTable());
+    PointTable table2;
     LasReader reader2;
     reader2.setOptions(opts);
     reader2.prepare(table2);
@@ -240,7 +240,7 @@ TEST(SpatialReferenceTest, test_writing_vlr)
     {
         FileUtils::deleteFile(tmpfile);
 
-        PointTablePtr table(new DefaultPointTable());
+        PointTable table;
         LasReader readerx;
         Options readerOpts;
 
@@ -261,7 +261,7 @@ TEST(SpatialReferenceTest, test_writing_vlr)
 
     // Reopen and check contents.
     {
-        PointTablePtr table(new DefaultPointTable());
+        PointTable table;
         Options ops;
         ops.add("filename", tmpfile);
         LasReader reader;

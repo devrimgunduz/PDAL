@@ -58,7 +58,7 @@ TEST(FerryFilterTest, test_ferry_copy)
     specReader.readPipeline(Support::configuredpath("filters/ferry.xml"));
 
     mgr.execute();
-    PointTablePtr table(mgr.pointTable());
+    const PointTableRef table(mgr.pointTable());
 
     PointViewSet viewSet = mgr.views();
 
@@ -66,8 +66,8 @@ TEST(FerryFilterTest, test_ferry_copy)
     PointViewPtr view = *viewSet.begin();
     EXPECT_EQ(view->size(), 1065u);
 
-    Dimension::Id::Enum state_plane_x = table->layout()->findDim("StatePlaneX");
-    Dimension::Id::Enum state_plane_y = table->layout()->findDim("StatePlaneY");
+    Dimension::Id::Enum state_plane_x = table.layout()->findDim("StatePlaneX");
+    Dimension::Id::Enum state_plane_y = table.layout()->findDim("StatePlaneY");
 
     double lon = view->getFieldAs<double>(Dimension::Id::X, 0);
     double lat = view->getFieldAs<double>(Dimension::Id::Y, 0);
@@ -101,7 +101,7 @@ TEST(FerryFilterTest, test_ferry_invalid)
     ferry.setInput(reader);
     ferry.setOptions(options);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     EXPECT_THROW(ferry.prepare(table), pdal_error);
 }

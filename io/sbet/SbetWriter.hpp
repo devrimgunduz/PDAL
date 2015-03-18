@@ -64,7 +64,7 @@ private:
     std::string m_filename;
 
     virtual void processOptions(const Options& options);
-    virtual void ready(PointTablePtr table);
+    virtual void ready(PointTableRef table);
     virtual void write(const PointViewPtr view);
 };
 

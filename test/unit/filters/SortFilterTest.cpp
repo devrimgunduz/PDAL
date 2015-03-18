@@ -56,10 +56,10 @@ void doSort(point_count_t count)
     SortFilter filter;
     filter.setOptions(opts);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     PointViewPtr view(new PointView(table));
 
-    table->layout()->registerDim(Dimension::Id::X);
+    table.layout()->registerDim(Dimension::Id::X);
 
     std::default_random_engine generator;
     std::uniform_real_distribution<double> dist(0.0, (double)count);

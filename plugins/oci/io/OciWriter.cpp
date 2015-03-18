@@ -758,7 +758,7 @@ void OciWriter::writeInit()
 }
 
 
-void OciWriter::ready(PointTablePtr table)
+void OciWriter::ready(PointTableRef table)
 {
     bool haveOutputTable = blockTableExists();
     if (m_overwrite && haveOutputTable)
@@ -773,7 +773,7 @@ void OciWriter::ready(PointTablePtr table)
 }
 
 
-void OciWriter::done(PointTablePtr table)
+void OciWriter::done(PointTableRef table)
 {
     if (!m_connection)
         return;

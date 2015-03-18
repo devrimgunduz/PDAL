@@ -154,14 +154,14 @@ void AttributeFilter::processOptions(const Options& options)
     }
 }
 
-void AttributeFilter::ready(PointTablePtr table)
+void AttributeFilter::ready(PointTableRef table)
 {
     m_gdal_debug = std::shared_ptr<pdal::gdal::Debug>(
         new pdal::gdal::Debug(isDebug(), log()));
 
     for (auto& dim_par : m_dimensions)
     {
-        Dimension::Id::Enum t = table->layout()->findDim(dim_par.first);
+        Dimension::Id::Enum t = table.layout()->findDim(dim_par.first);
         dim_par.second.dim = t;
 
         if (dim_par.second.isogr)
@@ -356,11 +356,6 @@ void AttributeFilter::filter(PointViewPtr view)
 
         }
     }
-}
-
-
-void AttributeFilter::done(PointTablePtr table)
-{
 }
 
 } // namespace pdal

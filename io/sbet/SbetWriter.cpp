@@ -54,7 +54,7 @@ void SbetWriter::processOptions(const Options& options)
 }
 
 
-void SbetWriter::ready(PointTablePtr /*table*/)
+void SbetWriter::ready(PointTableRef)
 {
     m_stream.reset(new OLeStream(m_filename));
 }

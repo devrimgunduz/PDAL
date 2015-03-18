@@ -78,7 +78,7 @@ TEST(CropFilterTest, test_crop)
     stats.setOptions(statOpts);
     stats.setInput(filter);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     stats.prepare(table);
     PointViewSet viewSet = stats.execute(table);
     EXPECT_EQ(viewSet.size(), 1u);
@@ -142,7 +142,7 @@ TEST(CropFilterTest, test_crop_polygon)
     crop.setInput(reader);
     crop.setOptions(options);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     crop.prepare(table);
     PointViewSet viewSet = crop.execute(table);
@@ -206,7 +206,7 @@ TEST(CropFilterTest, test_crop_polygon_reprojection)
     crop.setOptions(options);
     crop.setInput(reprojection);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     PointViewPtr view(new PointView(table));
     crop.prepare(table);
     PointViewSet viewSet = crop.execute(table);

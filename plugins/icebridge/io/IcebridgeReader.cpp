@@ -107,7 +107,7 @@ void IcebridgeReader::addDimensions(PointLayoutPtr layout)
 }
 
 
-void IcebridgeReader::ready(PointTablePtr table)
+void IcebridgeReader::ready(PointTableRef table)
 {
     m_hdf5Handler.initialize(m_filename, hdf5Columns);
     m_index = 0;
@@ -179,7 +179,7 @@ point_count_t IcebridgeReader::read(PointViewPtr view, point_count_t count)
 }
 
 
-void IcebridgeReader::done(PointTablePtr table)
+void IcebridgeReader::done(PointTableRef table)
 {
     m_hdf5Handler.close();
 }

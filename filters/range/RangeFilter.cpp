@@ -86,9 +86,9 @@ void RangeFilter::processOptions(const Options& options)
     }
 }
 
-void RangeFilter::ready(PointTablePtr table)
+void RangeFilter::ready(PointTableRef table)
 {
-    const PointLayoutPtr layout(table->layout());
+    const PointLayoutPtr layout(table.layout());
     for (auto const& d : m_name_map)
     {
         m_dimensions_map.insert(

@@ -82,7 +82,7 @@ TEST(SbetWriterTest, testWrite)
         writer.setOptions(makeWriterOptions());
         writer.setInput(reader);
 
-        PointTablePtr table(new DefaultPointTable());
+        PointTable table;
         writer.prepare(table);
         writer.execute(table);
     }

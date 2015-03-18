@@ -174,7 +174,7 @@ void NitfWriter::write(const PointViewPtr view)
     LasWriter::write(view);
 }
 
-void NitfWriter::done(PointTablePtr table)
+void NitfWriter::done(PointTableRef table)
 {
     LasWriter::done(table);
 
@@ -227,7 +227,7 @@ void NitfWriter::done(PointTablePtr table)
         ::nitf::ImageSubheader subheader = image.getSubheader();
 
 
-        BOX3D bounds =  reprojectBoxToDD(table->spatialRef(), m_bounds);
+        BOX3D bounds =  reprojectBoxToDD(table.spatialRef(), m_bounds);
 
         double corners[4][2];
         corners[0][0] = bounds.maxy;     corners[0][1] = bounds.minx;

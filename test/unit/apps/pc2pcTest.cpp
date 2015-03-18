@@ -91,7 +91,7 @@ static bool fileIsOkay(const std::string& name)
 
 static bool fileIsCompressed(const std::string& name)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     Options ops;
     ops.add("filename", name);
@@ -104,7 +104,7 @@ static bool fileIsCompressed(const std::string& name)
 
 static bool fileHasSrs(const std::string& name)
 {
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     Options ops;
     ops.add("filename", name);

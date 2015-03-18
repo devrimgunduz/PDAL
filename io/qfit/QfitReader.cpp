@@ -329,7 +329,7 @@ void QfitReader::addDimensions(PointLayoutPtr layout)
 }
 
 
-void QfitReader::ready(PointTablePtr /*table*/)
+void QfitReader::ready(PointTableRef)
 {
     m_numPoints = m_point_bytes / m_size;
     if (m_point_bytes % m_size)
@@ -450,7 +450,7 @@ Dimension::IdList QfitReader::getDefaultDimensions()
 }
 
 
-void QfitReader::done(PointTablePtr /*table*/)
+void QfitReader::done(PointTableRef)
 {
     m_istream.reset();
 }

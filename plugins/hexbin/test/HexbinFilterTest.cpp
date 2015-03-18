@@ -80,12 +80,12 @@ TEST(HexbinFilterTest, HexbinFilterTest_test_1)
     hexbin->setOptions(options);
     hexbin->setInput(*reader);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     hexbin->prepare(table);
     hexbin->execute(table);
 
-    MetadataNode m = table->metadata();
+    MetadataNode m = table.metadata();
     m = m.findChild(hexbin->getName());
 
     std::string filename = Support::temppath("hexbin.txt");

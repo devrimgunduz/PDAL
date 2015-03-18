@@ -100,8 +100,8 @@ TEST(Compression, Simple)
     LasReader reader;
     reader.setOptions(opts);
 
-    PointTablePtr table(new DefaultPointTable());
-    PointLayoutPtr layout(table->layout());
+    PointTable table;
+    PointLayoutPtr layout(table.layout());
 
     reader.prepare(table);
     PointViewSet viewSet = reader.execute(table);
@@ -223,12 +223,12 @@ TEST(Compression, types)
 //     opts.add(opt_filename);
 //     pdal::drivers::las::Reader reader;
 //     reader.setOptions(opts);
-//     PointTablePtr ftable(new DefaultPointTable());
+//     PointTable ftable;
 //     reader.prepare(ftable);
 //     PointViewSet viewSet = reader.execute(ftable);
 //     PointViewPtr view = *viewSet.begin();
 //
-//     PointTablePtr table(new DefaultPointTable());
+//     PointTable table;
 //     table->registerDim(Dimension::Id::X);
 //     table->registerDim(Dimension::Id::Y);
 //     table->registerDim(Dimension::Id::Z);
@@ -261,7 +261,7 @@ TEST(Compression, types)
 // {
 //     using namespace pdal;
 //
-//     PointTablePtr table(new DefaultPointTable());
+//     PointTable table;
 //     table->registerDim(Dimension::Id::X);
 //     table->registerDim(Dimension::Id::Y);
 //     table->registerDim(Dimension::Id::Z);

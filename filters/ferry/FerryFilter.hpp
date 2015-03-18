@@ -61,7 +61,7 @@ public:
 private:
     virtual void processOptions(const Options&);
     virtual void addDimensions(PointLayoutPtr layout);
-    virtual void ready(PointTablePtr table);
+    virtual void ready(PointTableRef table);
     virtual void filter(PointViewPtr view);
 
     FerryFilter& operator=(const FerryFilter&); // not implemented

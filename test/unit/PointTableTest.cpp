@@ -44,8 +44,8 @@ TEST(PointTable, resolveType)
 {
     using namespace Dimension;
 
-    PointTablePtr table(new DefaultPointTable());
-    PointLayoutPtr layout(table->layout());
+    PointTable table;
+    PointLayoutPtr layout(table.layout());
 
     // Start with a default-defined dimension.
     layout->registerDim(Id::X);
@@ -146,7 +146,7 @@ TEST(PointTable, userView)
 
     reader.setOptions(opts);
 
-    PointTablePtr defTable(new DefaultPointTable());
+    PointTable defTable;
     reader.prepare(defTable);
     PointViewSet viewSet = reader.execute(defTable);
     PointViewPtr defView = *viewSet.begin();
@@ -169,7 +169,7 @@ TEST(PointTable, userView)
     };
 
     reader.setReadCb(readCb);
-    PointTablePtr table(new UserTable());
+    PointTable table;
 
     reader.prepare(table);
     reader.execute(table);

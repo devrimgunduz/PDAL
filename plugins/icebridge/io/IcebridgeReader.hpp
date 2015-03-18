@@ -70,9 +70,9 @@ private:
     point_count_t m_index;
 
     virtual void addDimensions(PointLayoutPtr layout);
-    virtual void ready(PointTablePtr table);
+    virtual void ready(PointTableRef table);
     virtual point_count_t read(PointViewPtr view, point_count_t count);
-    virtual void done(PointTablePtr table);
+    virtual void done(PointTableRef table);
     virtual bool eof();
 
     IcebridgeReader& operator=(const IcebridgeReader&);   // Not implemented.

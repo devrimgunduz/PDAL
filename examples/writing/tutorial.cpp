@@ -3,7 +3,6 @@
 #include <pdal/Pointtable->hpp>
 #include <pdal/Dimension.hpp>
 #include <pdal/Options.hpp>
-#include <pdal/StageFactory.hpp>
 
 #include <vector>
 
@@ -49,10 +48,10 @@ int main(int argc, char* argv[])
     Options options;
     options.add("filename", "myfile.las");
 
-    PointTablePtr table(new DefaultPointTable());
-    table->registerDim(Dimension::Id::X);
-    table->registerDim(Dimension::Id::Y);
-    table->registerDim(Dimension::Id::Z);
+    PointTable table;
+    table.registerDim(Dimension::Id::X);
+    table.registerDim(Dimension::Id::Y);
+    table.registerDim(Dimension::Id::Z);
 
     {
         PointViewPtr view(new PointView(table));
@@ -63,13 +62,11 @@ int main(int argc, char* argv[])
         BufferReader reader;
         reader.addView(view);
 
-        StageFactory f;
+        LasWriter writer;
 
-        std::unique_ptr<Stage> writer(f.createStage("writers.las"));
-
-        writer->setInput(&reader);
-        writer->setOptions(options);
-        writer->prepare(table);
-        writer->execute(table);
+        writer.setInput(&reader);
+        writer.setOptions(options);
+        writer.prepare(table);
+        writer.execute(table);
     }
 }

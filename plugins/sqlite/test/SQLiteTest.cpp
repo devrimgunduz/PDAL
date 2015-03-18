@@ -104,7 +104,7 @@ void testReadWrite(bool compression, bool scaling)
     sqliteWriter->setOptions(sqliteOptions);
     sqliteWriter->setInput(reader);
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
     sqliteWriter->prepare(table);
     sqliteWriter->execute(table);
 
@@ -112,7 +112,7 @@ void testReadWrite(bool compression, bool scaling)
     std::unique_ptr<Stage> sqliteReader(f.createStage("readers.sqlite"));
     sqliteReader->setOptions(sqliteOptions);
 
-    PointTablePtr table2(new DefaultPointTable());
+    PointTable table2;
     sqliteReader->prepare(table2);
     PointViewSet viewSet = sqliteReader->execute(table2);
     EXPECT_EQ(viewSet.size(), 1U);

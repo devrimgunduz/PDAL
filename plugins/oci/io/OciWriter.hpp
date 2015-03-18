@@ -67,9 +67,9 @@ private:
 
     virtual void processOptions(const Options& options);
     virtual void initialize();
-    virtual void ready(PointTablePtr table);
+    virtual void ready(PointTableRef table);
     virtual void write(const PointViewPtr view);
-    virtual void done(PointTablePtr table);
+    virtual void done(PointTableRef table);
     void writeInit();
     void writeTile(const PointViewPtr view);
 

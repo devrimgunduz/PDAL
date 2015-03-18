@@ -56,7 +56,7 @@ public:
 private:
     PointViewPtr m_view;
 
-    virtual void ready(PointTablePtr table)
+    virtual void ready(PointTableRef table)
         { m_view.reset(new PointView(table)); }
 
     virtual PointViewSet run(PointViewPtr in)

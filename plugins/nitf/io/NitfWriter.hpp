@@ -52,7 +52,7 @@ public:
 
 private:
     virtual void processOptions(const Options& options);
-    virtual void done(PointTablePtr table);
+    virtual void done(PointTableRef table);
     virtual void write(const PointViewPtr view);
 
     BOX3D m_bounds;

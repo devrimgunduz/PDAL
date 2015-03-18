@@ -64,7 +64,7 @@ TEST(ReprojectionFilterTest, ReprojectionFilterTest_test_1)
 {
     const char* epsg4326_wkt = "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433],AUTHORITY[\"EPSG\",\"4326\"]]";
 
-    PointTablePtr table(new DefaultPointTable());
+    PointTable table;
 
     const double postX = -93.351563;
     const double postY = 41.577148;
@@ -119,7 +119,7 @@ TEST(ReprojectionFilterTest, InPlaceReprojectionFilterTest_test_2)
     const double postZ = 131.570;
 
     {
-        PointTablePtr table(new DefaultPointTable());
+        PointTable table;
 
         const SpatialReference out_ref(epsg4326_wkt);
 
