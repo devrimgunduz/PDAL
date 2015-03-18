@@ -178,11 +178,6 @@ void SQLiteReader::validateQuery() const
 
 void SQLiteReader::addDimensions(PointLayoutPtr layout)
 {
-}
-
-
-void SQLiteReader::ready(PointTableRef table)
-{
     log()->get(LogLevel::Debug) << "Fetching schema object" << std::endl;
 
     std::ostringstream oss;
@@ -206,8 +201,12 @@ void SQLiteReader::ready(PointTableRef table)
     XMLSchema schema(s.data);
     m_patch->m_metadata = schema.getMetadata();
 
-    loadSchema(table.layout(), schema);
+    loadSchema(layout, schema);
+}
 
+
+void SQLiteReader::ready(PointTableRef table)
+{
     m_at_end = false;
     b_doneQuery = false;
 

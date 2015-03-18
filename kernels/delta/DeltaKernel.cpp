@@ -123,7 +123,7 @@ std::map<Point, Point>* cumulatePoints(PointView& source_data,
         double sy = source_data.getFieldAs<double>(Dimension::Id::Y, i);
         double sz = source_data.getFieldAs<double>(Dimension::Id::Z, i);
 
-        std::vector<std::size_t> ids = index->neighbors(sx, sy, sz, 1);
+        std::vector<std::size_t> ids = index->neighbors(sx, sy, sz);
         if (!ids.size())
         {
             std::ostringstream oss;
@@ -165,7 +165,7 @@ void DeltaKernel::outputDetail(PointView& source_data, PointView& candidate_data
         double sy = source_data.getFieldAs<double>(Dimension::Id::Y, i);
         double sz = source_data.getFieldAs<double>(Dimension::Id::Z, i);
 
-        std::vector<std::size_t> ids = m_index->neighbors(sx, sy, sz, 1);
+        std::vector<std::size_t> ids = m_index->neighbors(sx, sy, sz);
 
         if (!ids.size())
         {
