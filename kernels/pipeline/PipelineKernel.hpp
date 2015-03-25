@@ -62,6 +62,7 @@ private:
 
     std::string m_inputFile;
     std::string m_pipelineFile;
+    bool m_pipelineXml;
     bool m_validate;
 };
 

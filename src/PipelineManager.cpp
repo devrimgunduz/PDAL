@@ -108,17 +108,4 @@ point_count_t PipelineManager::execute()
     return cnt;
 }
 
-
-MetadataNode PipelineManager::getMetadata() const
-{
-    MetadataNode output("stages");
-
-    for (auto si = m_stages.begin(); si != m_stages.end(); ++si)
-    {
-        Stage *s = si->get();
-        output.add(s->getMetadata());
-    }
-    return output;
-}
-
 } // namespace pdal

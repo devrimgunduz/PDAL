@@ -230,6 +230,21 @@ std::vector<Stage *> Stage::findStage(std::string name)
     return output;
 }
 
+
+MetadataNode Stage::toMetadata(bool traverse) const
+{
+    MetadataNode node("stage");
+    node.add("type", getName());
+    node.add(getMetadata().clone("metadata"));
+    node.add(getOptions().toMetadata());
+
+    if (traverse)
+        for (Stage *s : m_inputs)
+            node.add(s->toMetadata(true));
+    return node;
+}
+
+
 std::ostream& operator<<(std::ostream& ostr, const Stage& stage)
 {
     ostr << "  Name: " << stage.getName() << std::endl;

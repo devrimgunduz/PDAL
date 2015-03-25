@@ -77,8 +77,6 @@ public:
     PointTableRef pointTable() const
         { return m_table; }
 
-    MetadataNode getMetadata() const;
-
 private:
     StageFactory m_factory;
     std::unique_ptr<PointTable> m_tablePtr;

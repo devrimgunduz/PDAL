@@ -115,8 +115,9 @@ public:
 
     virtual StageSequentialIterator* createSequentialIterator() const
         { return NULL; }
-    inline MetadataNode getMetadata() const
+    MetadataNode getMetadata() const
         { return m_metadata; }
+    MetadataNode toMetadata(bool traverse = true) const;
 
     /// Sets the UserCallback to manage progress/cancel operations
     void setUserCallback(UserCallback* userCallback)

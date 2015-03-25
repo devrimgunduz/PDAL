@@ -36,6 +36,8 @@
 
 #include <boost/program_options.hpp>
 
+#include <pdal/PDALUtils.hpp>
+
 namespace pdal
 {
 
@@ -48,7 +50,7 @@ CREATE_STATIC_PLUGIN(1, 0, PipelineKernel, Kernel, s_info)
 
 std::string PipelineKernel::getName() const { return s_info.name; }
 
-PipelineKernel::PipelineKernel() : m_validate(false)
+PipelineKernel::PipelineKernel() : m_pipelineXml(false), m_validate(false)
 {}
 
 
@@ -72,6 +74,9 @@ void PipelineKernel::addSwitches()
             "input file name")
         ("pipeline-serialization",
             po::value<std::string>(&m_pipelineFile)->default_value(""), "")
+        ("xml",
+            po::value<bool>(&m_pipelineXml)->zero_tokens()->
+                implicit_value(true), "Write pipeline serialization in XML.")
         ("validate",
             po::value<bool>(&m_validate)->zero_tokens()->implicit_value(true),
             "Validate the pipeline (including serialization), but do not "
@@ -114,8 +119,17 @@ int PipelineKernel::execute()
     manager.getStage()->execute(table);
     if (m_pipelineFile.size() > 0)
     {
-        pdal::PipelineWriter writer(manager);
-        writer.writePipeline(m_pipelineFile);
+        if (m_pipelineXml)
+        {
+            pdal::PipelineWriter writer(manager);
+            writer.writePipeline(m_pipelineFile);
+        }
+        else
+        {
+            Stage *s = manager.getStage();
+            std::ofstream out(m_pipelineFile);
+            utils::toJSON(s->toMetadata(), out);
+        }
     }
     return 0;
 }
