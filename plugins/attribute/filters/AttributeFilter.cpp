@@ -40,7 +40,6 @@
 
 #include <pdal/StageFactory.hpp>
 #include <pdal/QuadIndex.hpp>
-#include <pdal/GDALUtils.hpp>
 
 #include <ogr_geometry.h>
 #include <geos_c.h>
@@ -89,7 +88,7 @@ struct OGRFeatureDeleter
 
 void AttributeFilter::initialize()
 {
-    GlobalEnvironment::get().getGDALEnvironment();
+    GlobalEnvironment::get().initializeGDAL(log());
 }
 
 
