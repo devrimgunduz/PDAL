@@ -333,6 +333,7 @@ point_count_t OciReader::readPointMajor(PointView& view,
         if (m_cb)
             m_cb(view, nextId);
 
+        pos += packedPointSize();
         numRemaining--;
         nextId++;
         numRead++;

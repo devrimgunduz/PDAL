@@ -46,10 +46,18 @@ PDAL_ADD_PLUGIN(writer_libname writer nitf
     LINK_WITH ${NITRO_LIBRARIES})
 
 if (WITH_TESTS)
-    PDAL_ADD_TEST(pdal_io_nitf_reader_test
-        FILES test/NitfReaderTest.cpp
-        LINK_WITH ${reader_libname})
+	set(srcs
+        test/NitfWriterTest.cpp
+    )
+
     PDAL_ADD_TEST(pdal_io_nitf_writer_test
-        FILES test/NitfWriterTest.cpp
+        FILES "${srcs}"
         LINK_WITH ${writer_libname})
+
+    set(srcs
+        test/NitfReaderTest.cpp
+    )
+    PDAL_ADD_TEST(pdal_io_nitf_reader_test
+        FILES "${srcs}"
+        LINK_WITH ${reader_libname})
 endif()
