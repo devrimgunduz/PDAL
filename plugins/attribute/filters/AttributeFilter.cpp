@@ -37,6 +37,7 @@
 #include <memory>
 
 #include <pdal/GlobalEnvironment.hpp>
+#include <pdal/GDALUtils.hpp>
 
 #include <pdal/StageFactory.hpp>
 #include <pdal/QuadIndex.hpp>
